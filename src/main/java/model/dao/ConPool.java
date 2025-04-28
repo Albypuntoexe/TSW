@@ -29,7 +29,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package model;
+package model.dao;
 
 /**
  * @author Mattia De Rosa
@@ -52,7 +52,7 @@ public class ConPool {
 			p.setUrl("jdbc:mysql://localhost:3306/modelloMVCdb?serverTimezone=" + TimeZone.getDefault().getID());
 			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
 			p.setUsername("root");
-			p.setPassword("studentiTSW");
+			p.setPassword("alessia");
 			p.setMaxActive(100);
 			p.setInitialSize(10);
 			p.setMinIdle(10);

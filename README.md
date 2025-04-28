@@ -18,9 +18,10 @@ Adopta/
 │   │   │   │   │   ├── Order.java
 │   │   │   │   │   └── Indirizzo.java
 │   │   │   │   ├── dao/
-│   │   │   │   │   ├── AnimalDAO.java
+│   │   │   │   │   ├── SpecieAnimaleDAO.java
 │   │   │   │   │   ├── UserDAO.java
 │   │   │   │   │   └── OrderDAO.java
+│   │   │   │   │   └── IndirizzoDAO.java
 │   │   │   │   └── Cart.java
 │   │   ├── webapp/
 │   │   │   ├── WEB-INF/
