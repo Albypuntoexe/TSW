@@ -17,6 +17,7 @@ Hashing the provided password using the same SHA-1 algorithm as your User class
 Checking if there's a user in the database with matching credentials
 Returning the complete User object if found, or null if authentication fails*/
 
+/*todo tradurre tutti i commenti in italiano */
 public class UserDAO {
 
     /**

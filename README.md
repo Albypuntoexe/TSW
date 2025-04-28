@@ -7,22 +7,26 @@ Adopta/
 │   ├── main/
 │   │   ├── java/
 │   │   │   ├── controller/
-│   │   │   │   ├── AnimalController.java
-│   │   │   │   ├── CartController.java
-│   │   │   │   ├── UserController.java
-│   │   │   │   └── AdminController.java
+│   │   │   │   ├── .java
+│   │   │   │   ├── .java
+│   │   │   │   ├── .java
+│   │   │   │   └── .java
 │   │   │   ├── model/
 │   │   │   │   ├── beans/
 │   │   │   │   │   ├── SpecieAnimale.java
 │   │   │   │   │   ├── User.java
 │   │   │   │   │   ├── Order.java
 │   │   │   │   │   └── Indirizzo.java
+│   │   │   │   │   └── Cart.java
+│   │   │   │   │   └── CartItem.java
+│   │   │   │   │   └── OrderItem.java
+│   │   │   │   │   └── Prodotto.java
 │   │   │   │   ├── dao/
-│   │   │   │   │   ├── SpecieAnimaleDAO.java
+│   │   │   │   │   ├── ProdottoDAO.java
 │   │   │   │   │   ├── UserDAO.java
+│   │   │   │   │   ├── CartItem.java
 │   │   │   │   │   └── OrderDAO.java
-│   │   │   │   │   └── IndirizzoDAO.java
-│   │   │   │   └── Cart.java
+│   │   │   │   │   └── ConPool.java
 │   │   ├── webapp/
 │   │   │   ├── WEB-INF/
 │   │   │   │   ├── web.xml
