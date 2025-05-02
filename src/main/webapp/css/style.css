@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+* { /*rimuovi margini e padding di default*/
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    overflow-x: hidden; /* In modo da non far scrollare orizzontalmente */
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700; /*grassetto*/
+    font-size: 40px;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+#span1 {
+    border: 3px solid black;
+    color: black;
+    background-color: #a9bf39;
+    float: right;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+#ul1 {
+    float: left;
+    display: flex;
+    gap: 15px; /*spazio tra gli el della lista*/
+    list-style: none; /*toglie i punti*/
+    padding: 0;
+    margin: 0;
+    background: transparent;
+}
+
+.sticky-navbar {
+    position: sticky;
+    top: 0;
+    background-color: #ac8057;
+    display: flex;
+    justify-content: space-between; /* Distribuisce il contenuto a sinistra e destra */
+    align-items: center; /* Allinea verticalmente al centro */
+    padding: 10px 20px;
+    z-index: 1000; /* Garantisce che la navbar appaia sopra agli altri elementi */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombra leggera sotto la navbar */
+    width: 100%; /* Occupa tutta la larghezza disponibile */
+}
+
+.sticky-navbar .logo img {
+    height: 50px;
+}
+
+.dropdown {
+    position: relative; /* Permette di posizionare in modo ok il contenuto all'interno */
+}
+
+.dropbtn {
+    background-color: #a9bf39;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer; /*scurisce quando ci passi col mouse*/
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #d4e9b9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #a9bf39;
+}
+
+.dropdown-content a:hover {
+    background-color: #a9bf39;
+    color: white;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #8fae2d;
+}
+
+/*todo risolvere i problemi di visualizzazione*/
+.header-background {
+    background-image: url('../img/header.jpg');
+    background-size: contain; /*per non far perdere pezzi quando allarghi*/
+    background-repeat: no-repeat; /* Evita la ripetizione dell'immagine */
+    background-color: #333; /* Colore di sfondo che si vedrà ai lati dell'immagine se non copre tutto */
+    background-position: center;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 0;
+}
+
+.header-background h1 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.header-background p {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.animali-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.animale-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.animale-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+}

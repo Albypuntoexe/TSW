@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <body>
+<nav class="sticky-navbar">
+    <span class="logo">
+        <a href="index.html">
+            <img src="logo.png" alt="Logo">
+        </a>
+    </span>
+    <span id="span1" class="dropdown">
+        <button class="dropbtn">☰</button>
+        <span class="dropdown-content">
+            <a href="#">Profilo</a>
+            <a href="#">Ordini</a>
+            <a href="#">Donazioni</a>
+        </span>
+    </span>
+</nav>
+<header class="header-background">
+    <nav class="navbar">
+        <ul id="ul1" class="nav-links">
+            <li><a href="#">ACQUISTA UN KIT</a></li>
+            <li><a href="#">RINTRACCIA IL TUO ORDINE</a></li>
+            <li><a href="#">ALTRI MODI PER DONARE</a></li>
+            <li><a href="#">CHI SIAMO</a></li>
+            <li><a href="#">CONTATTACI</a></li>
+        </ul>
+        <span class="cta-button">
+        <a href="#" class="button">Area personale</a>
+    </span>
+    </nav>
+    <div class="header-content">
+        <h1>SUPPORTA UNA SPECIE A RISCHIO</h1>
+        <p>Sostieni una specie e ricevi in regalo un kit</p>
+    </div>
+</header>
+<!-- todo Qui vanno inserite la lista di animali , un ciclo stampa
+tutti gli animali presenti nel db usando le funzioni dao, come il sito wwf
+si prende l'immagine e un bottone associato ad ogni animale SUPPORTA ORA, una volta cliccato,
+si apre una pagina risultato che prende le foto e i dati del singolo animale,
+con i suoi kit e foto descrizioni ecc.. quindi esiste solo una result -->
+<span class="animali-container">
+    <c:forEach var="animale" items="${specieAnimali}">
+        <span class="animale-card">
+            <img src="${animale.urlImage}" alt="${animale.nome}" class="animale-img">
+            <h3>${animale.nome}</h3>
+            <button onclick="location.href='supporta-${animale.nome.toLowerCase()}.html'">SUPPORTA ORA</button>
+        </span>
+    </c:forEach>
+</span>
 
+<hr />
+<p>Descrizioni aggiuntive</p>
+<hr/>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h1>Chi siamo</h1>
+            <p>Informazioni sull'organizzazione e la sua missione.</p>
+        </div>
+        <div class="footer-section links">
+            <h1>Link Utili</h1>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Termini di Servizio</a></li>
+                <li><a href="#">Contatti</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2023 Nome dell'Organizzazione. Tutti i diritti riservati.
+    </div>
+<script> <!--javascript per menu a tendina-->
+    document.querySelector('.dropbtn').addEventListener('click', function () {
+        const dropdown = document.querySelector('.dropdown-content');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+</script>
 </body>
 </html>

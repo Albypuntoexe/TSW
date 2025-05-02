@@ -5,10 +5,7 @@ public class SpecieAnimale {
     private String nome;
     private String descrizione;
     private double prezzo;
-
-    //private String urlimage;
-    //penso anche l'url ma poi vediamo
-    /*todo*/
+    private String urlImage; // Aggiunto campo per il link all'immagine
 
     public SpecieAnimale(){}
     public int setId(int id){ return this.id = id; }
@@ -19,4 +16,6 @@ public class SpecieAnimale {
     public String getDescrizione(){ return this.descrizione; }
     public void setPrezzo(double prezzo){ this.prezzo = prezzo; }
     public double getPrezzo(){ return this.prezzo; }
-    }
+    public String getUrlImage() {return urlImage;}
+    public void setUrlImage(String urlImage) {this.urlImage = urlImage;}
+}
