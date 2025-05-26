@@ -1,0 +1,37 @@
+# Adopta
+
+**Adopta** è una webapp progettata per supportare le specie a rischio di estinzione. Attraverso la piattaforma, gli utenti possono effettuare donazioni per sostenere una specifica specie animale e, in cambio, ricevere un kit regalo contenente gadget personalizzati legati all'animale scelto.
+
+## Funzionalità principali
+
+- **Esplorazione delle specie a rischio**: Gli utenti possono visualizzare una lista di animali in pericolo, completa di immagini e descrizioni.
+- **Donazioni personalizzate**: Ogni animale ha una pagina dedicata che consente agli utenti di effettuare una donazione e scegliere un kit regalo.
+- **Area personale**: Gli utenti possono accedere a una sezione dedicata per gestire i propri ordini, visualizzare le donazioni effettuate e aggiornare i propri dati.
+- **Informazioni aggiuntive**: La piattaforma offre dettagli sulla missione dell'organizzazione, modi alternativi per donare e contatti.
+
+## Logica di base del sito
+
+1. **Homepage**:
+   - Mostra un'introduzione alla missione di Adopta.
+   - Presenta una lista di animali recuperata dinamicamente dal database tramite un DAO (Data Access Object).
+   - Ogni animale è rappresentato da un'immagine, un nome e un pulsante "SUPPORTA ORA".
+
+2. **Pagina di dettaglio dell'animale**:
+   - Quando un utente clicca su "SUPPORTA ORA", viene reindirizzato a una pagina dedicata all'animale selezionato.
+   - La pagina mostra informazioni dettagliate sull'animale, inclusi descrizione, immagini e opzioni di donazione.
+
+3. **Gestione backend**:
+   - Le informazioni sugli animali sono gestite tramite un database relazionale.
+   - Le operazioni CRUD (Create, Read, Update, Delete) sugli animali sono implementate tramite il DAO.
+   - Le servlet gestiscono la logica di business, recuperando i dati dal database e inoltrandoli alle pagine JSP.
+
+4. **Frontend**:
+   - Le pagine sono costruite con HTML, CSS e JSTL (JavaServer Pages Standard Tag Library) per la generazione dinamica dei contenuti.
+   - Il design è responsivo e ottimizzato per offrire un'esperienza utente fluida.
+
+5. **Area personale**:
+   - Gli utenti registrati possono accedere a una dashboard per visualizzare lo storico delle donazioni e gestire i propri dati.
+
+## Obiettivo
+
+L'obiettivo di Adopta è sensibilizzare il pubblico sulla protezione delle specie a rischio, offrendo un modo semplice e gratificante per contribuire alla loro salvaguardia.
