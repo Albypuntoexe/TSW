@@ -193,4 +193,17 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean doRetrieveByUsernamePassword(String username, String password) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT username FROM user WHERE username=? AND password=?");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // Returns true if a matching user is found
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
