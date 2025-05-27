@@ -6,35 +6,34 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
-<!--sticky navbar con logo e menu a tendina-->
+
 <body>
+<!-- Navbar sticky con logo, menu e carrello -->
 <nav class="sticky-navbar">
     <span class="logo">
-        <a href="index.html">
+        <a href="index.jsp">
             <img src="./img/logo.png" alt="Logo">
         </a>
     </span>
-    <span id="span1" class="dropdown">
-        <button class="dropbtn">☰</button>
-        <span class="dropdown-content">
-            <a href="#">Area Personale</a>
-            <a href="#">Ordini</a>
-            <a href="#">Carrello</a>
+
+    <!-- Menu a tendina e carrello -->
+    <div class="nav-right">
+        <a href="carrello.jsp" class="cart-icon">
+            <img src="./img/carrello.png" alt="Carrello">
+        </a>
+        <span class="dropdown">
+            <button class="dropbtn">☰</button>
+            <span class="dropdown-content">
+                <a href="area-personale.jsp">Area Personale</a>
+                <a href="ordini.jsp">Ordini</a>
+                <a href="contatti.jsp">Contatti</a>
+            </span>
         </span>
-    </span>
+
+    </div>
 </nav>
 
 <header class="header-background">
-    <!-- Menu di navigazione principale -->
-    <nav class="main-navbar">
-        <ul class="nav-links">
-            <li><a href="./WEB-INF/results/prodotti.jsp">ACQUISTA UN KIT</a></li>
-            <li><a href="#tracking">RINTRACCIA IL TUO ORDINE</a></li>
-            <li><a href="#donate">ALTRI MODI PER DONARE</a></li>
-            <li><a href="#about">CHI SIAMO</a></li>
-            <li><a href="#contact">CONTATTACI</a></li>
-        </ul>
-    </nav>
     <!-- Contenuto hero della pagina -->
     <div class="hero-content">
         <h1 class="hero-title">SUPPORTA UNA SPECIE A RISCHIO</h1>
@@ -56,22 +55,38 @@
         </div>
     </div>
 </header>
-<!-- todo Qui vanno inserite la lista di animali , un ciclo stampa
-tutti gli animali presenti nel db usando le funzioni dao, come il sito wwf
-si prende l'immagine e un bottone associato ad ogni animale SUPPORTA ORA, una volta cliccato,
-si apre una pagina risultato che prende le foto e i dati del singolo animale,
-con i suoi kit e foto descrizioni ecc.. quindi esiste solo una result -->
-<span class="animali-container">
-    <c:forEach var="animale" items="${specieAnimali}">
-        <span class="animale-card">
-            <img src="${animale.urlImage}" alt="${animale.nome}" class="animale-img">
-            <h3>${animale.nome}</h3>
-            <button onclick="location.href='supporta-${animale.nome.toLowerCase()}.html'">SUPPORTA ORA</button>
-        </span>
-    </c:forEach>
-</span>
+
+<!-- Sezione prodotto in evidenza -->
+<section class="featured-product">
+    <div class="container">
+        <div class="product-showcase">
+            <div class="product-image">
+                <a href="prodotti.jsp">
+                    <img src="./img/hero.jpg" alt="Kit Adozione Premium">
+                </a>
+            </div>
+            <div class="product-info">
+                <h2>Kit Adozione Premium</h2>
+                <p>Il nostro kit più completo include peluche personalizzato, foto dell'animale adottato, bracciale e molto altro.
+                    Perfetto per fare la differenza e ricevere un ricordo tangibile del tuo contributo.</p>
+                <a href="prodotti.jsp" class="cta-button">SCOPRI I KIT DISPONIBILI</a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <main class="main-content">
+    <!-- Lista animali dal database -->
+    <span class="animali-container">
+        <c:forEach var="animale" items="${specieAnimali}">
+            <span class="animale-card">
+                <img src="${animale.urlImage}" alt="${animale.nome}" class="animale-img">
+                <h3>${animale.nome}</h3>
+                <button onclick="location.href='supporta-${animale.nome.toLowerCase()}.html'">SUPPORTA ORA</button>
+            </span>
+        </c:forEach>
+    </span>
+
     <!-- Sezione impatto delle donazioni -->
     <section class="impact-section">
         <div class="container">
@@ -121,6 +136,7 @@ con i suoi kit e foto descrizioni ecc.. quindi esiste solo una result -->
         </div>
     </section>
 </main>
+
 <!-- Sezione FAQ -->
 <section class="faq-section">
     <div class="container">
@@ -138,27 +154,25 @@ con i suoi kit e foto descrizioni ecc.. quindi esiste solo una result -->
             <p>Puoi scriverci all'indirizzo email indicato nella sezione contatti.</p>
         </div>
     </div>
+</section>
 
 <!-- Footer della pagina -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-content">
-            <!-- Informazioni organizzazione -->
             <div class="footer-section">
                 <h3>Chi siamo</h3>
                 <p>Organizzazione dedicata alla protezione delle specie animali a rischio estinzione.</p>
             </div>
-            <!-- Link utili -->
             <div class="footer-section">
                 <h3>Link Utili</h3>
                 <ul class="footer-links">
-                    <li><a href="#privacy">Privacy Policy</a></li>
-                    <li><a href="#terms">Termini e Condizioni</a></li>
-                    <li><a href="#contact">Politica di Spedizione</a></li>
-                    <li><a href="#contact">Contatti</a></li>
+                    <li><a href="privacy.jsp">Privacy Policy</a></li>
+                    <li><a href="termini.jsp">Termini e Condizioni</a></li>
+                    <li><a href="spedizioni.jsp">Politica di Spedizione</a></li>
+                    <li><a href="contatti.jsp">Contatti</a></li>
                 </ul>
             </div>
-            <!-- Contatti -->
             <div class="footer-section">
                 <h3>Contatti</h3>
                 <div class="contact-info">
@@ -173,13 +187,11 @@ con i suoi kit e foto descrizioni ecc.. quindi esiste solo una result -->
     </div>
 </footer>
 
-
-<script> <!--javascript per menu a tendina-->
+<script>
     document.querySelector('.dropbtn').addEventListener('click', function () {
         const dropdown = document.querySelector('.dropdown-content');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
 </script>
-</footer>
 </body>
 </html>
