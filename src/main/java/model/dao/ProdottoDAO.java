@@ -27,6 +27,29 @@ public class ProdottoDAO {
         }
     }
 
+    // Recupera un prodotto in base all'asociazione con la specie animale
+    public List<Prodotto> doRetrieveBySpecieId(int specieId) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE specie_id = ?");
+            ps.setInt(1, specieId);
+            ResultSet rs = ps.executeQuery();
+            List<Prodotto> prodotti = new ArrayList<>();
+            while (rs.next()) {
+                Prodotto p = new Prodotto();
+                p.setCodice(rs.getInt("codice"));
+                p.setNome(rs.getString("nome"));
+                p.setPrezzo(rs.getDouble("prezzo"));
+                p.setTipo(rs.getInt("tipo"));
+                p.setDescrizione(rs.getString("descrizione"));
+                p.setUrlImage(rs.getString("url_image"));
+                prodotti.add(p);
+            }
+            return prodotti;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // Recupera un prodotto dal suo codice
     public Prodotto doRetrieveByCodice(int codice) {
         try (Connection con = ConPool.getConnection()) {

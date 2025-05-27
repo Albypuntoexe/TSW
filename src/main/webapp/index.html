@@ -76,16 +76,18 @@
 </section>
 
 <main class="main-content">
-    <!-- Lista animali dal database -->
+    <!-- Lista animali dal database,Ogni animale avrà un link che passa il suo id come parametro nell'href -->
     <span class="animali-container">
-        <c:forEach var="animale" items="${specieAnimali}">
-            <span class="animale-card">
+    <c:forEach var="animale" items="${specieAnimali}">
+        <span class="animale-card">
+            <a href="prodotto.jsp?id=${animale.id}">
                 <img src="${animale.urlImage}" alt="${animale.nome}" class="animale-img">
-                <h3>${animale.nome}</h3>
-                <button onclick="location.href='supporta-${animale.nome.toLowerCase()}.html'">SUPPORTA ORA</button>
-            </span>
-        </c:forEach>
-    </span>
+            </a>
+            <h3>${animale.nome}</h3>
+            <button onclick="location.href='prodotto.jsp?id=${animale.id}'">SUPPORTA ORA</button>
+        </span>
+    </c:forEach>
+</span>
 
     <!-- Sezione impatto delle donazioni -->
     <section class="impact-section">
