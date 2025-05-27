@@ -6,38 +6,54 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
+<!--sticky navbar con logo e menu a tendina-->
 <body>
 <nav class="sticky-navbar">
     <span class="logo">
         <a href="index.html">
-            <img src="logo.png" alt="Logo">
+            <img src="./img/logo.png" alt="Logo">
         </a>
     </span>
     <span id="span1" class="dropdown">
         <button class="dropbtn">☰</button>
         <span class="dropdown-content">
-            <a href="#">Profilo</a>
+            <a href="#">Area Personale</a>
             <a href="#">Ordini</a>
-            <a href="#">Donazioni</a>
+            <a href="#">Carrello</a>
         </span>
     </span>
 </nav>
+
 <header class="header-background">
-    <nav class="navbar">
-        <ul id="ul1" class="nav-links">
-            <li><a href="#">ACQUISTA UN KIT</a></li>
-            <li><a href="#">RINTRACCIA IL TUO ORDINE</a></li>
-            <li><a href="#">ALTRI MODI PER DONARE</a></li>
-            <li><a href="#">CHI SIAMO</a></li>
-            <li><a href="#">CONTATTACI</a></li>
+    <!-- Menu di navigazione principale -->
+    <nav class="main-navbar">
+        <ul class="nav-links">
+            <li><a href="./WEB-INF/results/prodotti.jsp">ACQUISTA UN KIT</a></li>
+            <li><a href="#tracking">RINTRACCIA IL TUO ORDINE</a></li>
+            <li><a href="#donate">ALTRI MODI PER DONARE</a></li>
+            <li><a href="#about">CHI SIAMO</a></li>
+            <li><a href="#contact">CONTATTACI</a></li>
         </ul>
-        <span class="cta-button">
-        <a href="#" class="button">Area personale</a>
-    </span>
     </nav>
-    <div class="header-content">
-        <h1>SUPPORTA UNA SPECIE A RISCHIO</h1>
-        <p>Sostieni una specie e ricevi in regalo un kit</p>
+    <!-- Contenuto hero della pagina -->
+    <div class="hero-content">
+        <h1 class="hero-title">SUPPORTA UNA SPECIE A RISCHIO</h1>
+        <p class="hero-subtitle">Sostieni una specie e ricevi in regalo un kit di adozione</p>
+        <!-- Statistiche in evidenza -->
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">150+</span>
+                <span class="stat-label">Specie protette</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Sostenitori attivi</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">25</span>
+                <span class="stat-label">Paesi coinvolti</span>
+            </div>
+        </div>
     </div>
 </header>
 <!-- todo Qui vanno inserite la lista di animali , un ciclo stampa
@@ -55,32 +71,115 @@ con i suoi kit e foto descrizioni ecc.. quindi esiste solo una result -->
     </c:forEach>
 </span>
 
-<hr />
-<p>Descrizioni aggiuntive</p>
-<hr/>
-<footer>
-    <div class="footer-content">
-        <div class="footer-section about">
-            <h1>Chi siamo</h1>
-            <p>Informazioni sull'organizzazione e la sua missione.</p>
+<main class="main-content">
+    <!-- Sezione impatto delle donazioni -->
+    <section class="impact-section">
+        <div class="container">
+            <h2>Il tuo impatto conta</h2>
+            <p>Grazie al supporto dei nostri sostenitori, abbiamo raggiunto risultati straordinari</p>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-icon">🌳</div>
+                    <h3>10.000 ettari protetti</h3>
+                    <p>di habitat naturale preservato</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">🐾</div>
+                    <h3>2.500 animali salvati</h3>
+                    <p>attraverso programmi di recupero</p>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">👥</div>
+                    <h3>15.000 persone educate</h3>
+                    <p>sulla conservazione ambientale</p>
+                </div>
+            </div>
         </div>
-        <div class="footer-section links">
-            <h1>Link Utili</h1>
-            <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Termini di Servizio</a></li>
-                <li><a href="#">Contatti</a></li>
-            </ul>
+    </section>
+
+    <!-- Sezione come funziona -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>Come funziona l'adozione</h2>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h3>Scegli la specie</h3>
+                    <p>Seleziona l'animale che vuoi supportare</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h3>Completa l'adozione</h3>
+                    <p>Scegli il tipo di supporto</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <h3>Ricevi il kit</h3>
+                    <p>Ti invieremo foto e certificato</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Sezione FAQ -->
+<section class="faq-section">
+    <div class="container">
+        <h2>Domande Frequenti</h2>
+        <div class="faq-item">
+            <h3>Come posso supportare una specie?</h3>
+            <p>Puoi scegliere di adottare una specie e ricevere un kit di adozione personalizzato.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Quali sono i metodi di pagamento accettati?</h3>
+            <p>Accettiamo carte di credito, PayPal e bonifici bancari.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Come posso contattarvi per ulteriori informazioni?</h3>
+            <p>Puoi scriverci all'indirizzo email indicato nella sezione contatti.</p>
         </div>
     </div>
-    <div class="footer-bottom">
-        &copy; 2023 Nome dell'Organizzazione. Tutti i diritti riservati.
+
+<!-- Footer della pagina -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <!-- Informazioni organizzazione -->
+            <div class="footer-section">
+                <h3>Chi siamo</h3>
+                <p>Organizzazione dedicata alla protezione delle specie animali a rischio estinzione.</p>
+            </div>
+            <!-- Link utili -->
+            <div class="footer-section">
+                <h3>Link Utili</h3>
+                <ul class="footer-links">
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Termini e Condizioni</a></li>
+                    <li><a href="#contact">Politica di Spedizione</a></li>
+                    <li><a href="#contact">Contatti</a></li>
+                </ul>
+            </div>
+            <!-- Contatti -->
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <div class="contact-info">
+                    <p>📧 info@adopta.org</p>
+                    <p>📞 +39 341 145 3486</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Supporta Specie a Rischio. Tutti i diritti riservati.</p>
+        </div>
     </div>
+</footer>
+
+
 <script> <!--javascript per menu a tendina-->
     document.querySelector('.dropbtn').addEventListener('click', function () {
         const dropdown = document.querySelector('.dropdown-content');
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
 </script>
+</footer>
 </body>
 </html>
