@@ -194,14 +194,36 @@ public class UserDAO {
         }
     }
 
-    public boolean doRetrieveByUsernamePassword(String username, String password) {
+    public User doRetrieveByUsernamePassword(String username, String password) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT username FROM user WHERE username=? AND password=?");
+                    "SELECT email, telefono, password, username, nome, cognome FROM user WHERE username=? AND password=?");
             ps.setString(1, username);
-            ps.setString(2, password);
+
+            // Hash the password to compare with stored hash
+            try {
+                java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-1");
+                digest.reset();
+                digest.update(password.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                String hashedPassword = String.format("%040x", new java.math.BigInteger(1, digest.digest()));
+                ps.setString(2, hashedPassword);
+            } catch (java.security.NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
+
             ResultSet rs = ps.executeQuery();
-            return rs.next(); // Returns true if a matching user is found
+            if (rs.next()) {
+                User user = new User(
+                        rs.getString("email"),
+                        rs.getString("telefono"),
+                        rs.getString("password"),
+                        rs.getString("username"),
+                        rs.getString("nome"),
+                        rs.getString("cognome")
+                );
+                return user;
+            }
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

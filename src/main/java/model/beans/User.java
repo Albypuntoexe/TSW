@@ -10,6 +10,7 @@ public class User {
     private String username;
     private String nome;
     private String cognome;
+    private boolean admin = false;
 
     public User() {}
     public User(String email, String telefono, String password, String username, String nome, String cognome) {
@@ -31,7 +32,8 @@ public class User {
     public void setTelefono(String telefono) { this.telefono = telefono; }
     public String getTelefono() { return telefono; }
     public String getPassword() { return password; } //a quanto pare anche se è cifrata funziona secondo claude
-
+    public boolean isAdmin() {return admin;}
+    public void setAdmin(boolean admin) {this.admin = admin;}
     /*todo chiedere al prof se va bene (presa da github)*/
     public void setPasswordSHA(String password)
     {
