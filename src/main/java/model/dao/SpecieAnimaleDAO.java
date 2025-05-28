@@ -19,7 +19,6 @@ public class SpecieAnimaleDAO {
                 s.setId(rs.getInt("id"));
                 s.setNome(rs.getString("nome"));
                 s.setDescrizione(rs.getString("descrizione"));
-                s.setPrezzo(rs.getDouble("prezzo"));
                 s.setUrlImage(rs.getString("url_image"));
                 specieAnimali.add(s);
             }
@@ -40,7 +39,6 @@ public class SpecieAnimaleDAO {
                 s.setId(rs.getInt("id"));
                 s.setNome(rs.getString("nome"));
                 s.setDescrizione(rs.getString("descrizione"));
-                s.setPrezzo(rs.getDouble("prezzo"));
                 s.setUrlImage(rs.getString("url_image"));
                 return s;
             }
@@ -62,7 +60,6 @@ public class SpecieAnimaleDAO {
                 s.setId(rs.getInt("id"));
                 s.setNome(rs.getString("nome"));
                 s.setDescrizione(rs.getString("descrizione"));
-                s.setPrezzo(rs.getDouble("prezzo"));
                 s.setUrlImage(rs.getString("url_image"));
                 specieAnimali.add(s);
             }
@@ -76,13 +73,12 @@ public class SpecieAnimaleDAO {
     public void doSave(SpecieAnimale specieAnimale) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO specie_animale (nome, descrizione, prezzo, url_image) VALUES (?, ?, ?, ?)",
+                    "INSERT INTO specie_animale (nome, descrizione, url_image) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
             ps.setString(1, specieAnimale.getNome());
             ps.setString(2, specieAnimale.getDescrizione());
-            ps.setDouble(3, specieAnimale.getPrezzo());
-            ps.setString(4, specieAnimale.getUrlImage());
+            ps.setString(3, specieAnimale.getUrlImage());
             ps.executeUpdate();
 
             // Recupera l'ID generato automaticamente
@@ -99,13 +95,12 @@ public class SpecieAnimaleDAO {
     public void doUpdate(SpecieAnimale specieAnimale) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE specie_animale SET nome=?, descrizione=?, prezzo=?, url_image=? WHERE id=?"
+                    "UPDATE specie_animale SET nome=?, descrizione=?, url_image=? WHERE id=?"
             );
             ps.setString(1, specieAnimale.getNome());
             ps.setString(2, specieAnimale.getDescrizione());
-            ps.setDouble(3, specieAnimale.getPrezzo());
-            ps.setString(4, specieAnimale.getUrlImage());
-            ps.setInt(5, specieAnimale.getId());
+            ps.setString(3, specieAnimale.getUrlImage());
+            ps.setInt(4, specieAnimale.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -11,11 +11,12 @@ import model.dao.UserDAO;
 
 import java.io.IOException;
 
-// Servlet per la gestione del login utente
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -26,16 +27,17 @@ public class LoginServlet extends HttpServlet {
             // Utente trovato, salva in sessione
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("show-prodotti");
+            // Reindirizza alla home page (che ora è gestita da servlet)
+            response.sendRedirect(request.getContextPath() + "/");
         } else {
-            // Utente non trovato, redirect con errore
-            response.sendRedirect("index.jsp?error=1");
+            // Utente non trovato, torna alla home con errore
+            response.sendRedirect(request.getContextPath() + "/?error=1");
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doPost(request, response);
     }
 }
-

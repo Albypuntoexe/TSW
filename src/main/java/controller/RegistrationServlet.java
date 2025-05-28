@@ -10,11 +10,12 @@ import model.dao.UserDAO;
 
 import java.io.IOException;
 
-// Servlet per la registrazione di un nuovo utente
 @WebServlet(name = "RegistrationServlet", value = "/process_registration")
 public class RegistrationServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -34,12 +35,13 @@ public class RegistrationServlet extends HttpServlet {
         // Salva l'utente in sessione
         request.getSession().setAttribute("user", user);
 
-        response.sendRedirect("show-prodotti");
+        // Reindirizza alla home page
+        response.sendRedirect(request.getContextPath() + "/");
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         doPost(request, response);
     }
 }
-

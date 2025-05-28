@@ -34,7 +34,7 @@ public class User {
     public String getPassword() { return password; } //a quanto pare anche se è cifrata funziona secondo claude
     public boolean isAdmin() {return admin;}
     public void setAdmin(boolean admin) {this.admin = admin;}
-    /*todo chiedere al prof se va bene (presa da github)*/
+
     public void setPasswordSHA(String password)
     {
         try

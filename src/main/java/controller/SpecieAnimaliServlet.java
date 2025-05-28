@@ -12,28 +12,23 @@ import model.dao.SpecieAnimaleDAO;
 import java.io.IOException;
 import java.util.List;
 
-// Servlet principale per la home page - mostra le specie animali
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"}) // Pagina principale
-public class HomeServlet extends HttpServlet {
+@WebServlet("/specie-animali")
+public class SpecieAnimaliServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Recupera le specie animali dal ServletContext (caricate all'avvio)
-        List<SpecieAnimale> specieAnimali = (List<SpecieAnimale>)
-                getServletContext().getAttribute("specieAnimali");
+        // Recupera dal ServletContext o direttamente dal database
+        List<SpecieAnimale> specieAnimali = (List<SpecieAnimale>) getServletContext().getAttribute("specieAnimali");
 
-        // Se non ci sono nel context, recupera dal database come fallback
-        if (specieAnimali == null || specieAnimali.isEmpty()) {
+        // Se non ci sono nel context, recupera dal database
+        if (specieAnimali == null) {
             SpecieAnimaleDAO dao = new SpecieAnimaleDAO();
             specieAnimali = dao.doRetrieveAll();
         }
 
-        // Mette i dati nel request per la JSP
         request.setAttribute("specieAnimali", specieAnimali);
-
-        // Inoltra alla JSP principale
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/results/result.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -15,12 +15,12 @@
 <nav class="sticky-navbar">
     <span class="logo">
         <a href="index.jsp">
-            <img src="./img/logo.png" alt="Logo">
+            <img src="img/logo.png" alt="Logo">
         </a>
     </span>
   <div class="nav-right">
     <a href="carrello.jsp" class="cart-icon">
-      <img src="./img/carrello.png" alt="Carrello">
+      <img src="img/carrello.png" alt="Carrello">
     </a>
     <span class="dropdown">
             <button class="dropbtn">☰</button>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
     <title>Adopta | Salva una specie</title>
 </head>
 
@@ -13,14 +13,14 @@
 <nav class="sticky-navbar">
     <span class="logo">
         <a href="index.jsp">
-            <img src="./img/logo.png" alt="Logo">
+            <img src="img/logo.png" alt="Logo">
         </a>
     </span>
 
     <!-- Menu a tendina e carrello -->
     <div class="nav-right">
         <a href="carrello.jsp" class="cart-icon">
-            <img src="./img/carrello.png" alt="Carrello">
+            <img src="img/carrello.png" alt="Carrello">
         </a>
         <span class="dropdown">
             <button class="dropbtn">☰</button>
@@ -63,22 +63,22 @@
         <div class="product-showcase">
             <div class="product-image">
                 <a href="prodotti.jsp">
-                    <img src="./img/hero.jpg" alt="Kit Adozione Premium">
+                    <img src="img/hero.jpg" alt="Kit Adozione Premium">
                 </a>
             </div>
             <div class="product-info">
                 <h2>Kit Adozione Premium</h2>
                 <p>Il nostro kit più completo include peluche personalizzato, foto dell'animale adottato, bracciale e molto altro.
                     Perfetto per fare la differenza e ricevere un ricordo tangibile del tuo contributo.</p>
-                <a href="prodotti.jsp" class="cta-button">SCOPRI I KIT DISPONIBILI</a>
-            </div>
+                <a href="#animali-container" class="cta-button">SCOPRI I KIT DISPONIBILI</a>
+            </div> <!-- ancora -->
         </div>
     </div>
 </section>
 
 <main class="main-content">
     <!-- Lista animali dal database,Ogni animale avrà un link che passa il suo id come parametro nell'href -->
-    <span class="animali-container">
+    <span class="animali-container" id="animali-container">
     <c:forEach var="animale" items="${specieAnimali}">
         <span class="animale-card">
             <a href="prodotto.jsp?id=${animale.id}">
@@ -198,3 +198,5 @@
 </script>
 </body>
 </html>
+
+
