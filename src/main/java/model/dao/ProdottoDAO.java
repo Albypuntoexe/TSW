@@ -16,6 +16,7 @@ public class ProdottoDAO {
             while (rs.next()) {
                 Prodotto p = new Prodotto();
                 p.setCodice(rs.getInt("codice"));
+                p.setSpecieId(rs.getInt("specie_id"));
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
@@ -27,7 +28,7 @@ public class ProdottoDAO {
         }
     }
 
-    // Recupera un prodotto in base all'asociazione con la specie animale
+    // Recupera un prodotto in base all'associazione con la specie animale
     public List<Prodotto> doRetrieveBySpecieId(int specieId) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE specie_id = ?");
@@ -37,6 +38,7 @@ public class ProdottoDAO {
             while (rs.next()) {
                 Prodotto p = new Prodotto();
                 p.setCodice(rs.getInt("codice"));
+                p.setSpecieId(rs.getInt("specie_id"));
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
@@ -59,9 +61,11 @@ public class ProdottoDAO {
             if (rs.next()) {
                 Prodotto p = new Prodotto();
                 p.setCodice(rs.getInt("codice"));
+                p.setSpecieId(rs.getInt("specie_id"));
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
+                p.setSpecieId(rs.getInt("specie_id"));
                 return p;
             }
             return null;
@@ -80,6 +84,7 @@ public class ProdottoDAO {
             while (rs.next()) {
                 Prodotto p = new Prodotto();
                 p.setCodice(rs.getInt("codice"));
+                p.setSpecieId(rs.getInt("specie_id"));
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
@@ -91,7 +96,7 @@ public class ProdottoDAO {
         }
     }
 
-    // Ricerca prodotti per nome (pattern matching)
+    // Ricerca prodotti per nome
     public List<Prodotto> doRetrieveByNome(String nome) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE nome LIKE ?");
@@ -101,28 +106,7 @@ public class ProdottoDAO {
             while (rs.next()) {
                 Prodotto p = new Prodotto();
                 p.setCodice(rs.getInt("codice"));
-                p.setNome(rs.getString("nome"));
-                p.setPrezzo(rs.getDouble("prezzo"));
-                p.setTipo(rs.getInt("tipo"));
-                prodotti.add(p);
-            }
-            return prodotti;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    // Recupera prodotti con prezzo in un certo range
-    public List<Prodotto> doRetrieveByPrezzoRange(double min, double max) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE prezzo BETWEEN ? AND ?");
-            ps.setDouble(1, min);
-            ps.setDouble(2, max);
-            ResultSet rs = ps.executeQuery();
-            List<Prodotto> prodotti = new ArrayList<>();
-            while (rs.next()) {
-                Prodotto p = new Prodotto();
-                p.setCodice(rs.getInt("codice"));
+                p.setSpecieId(rs.getInt("specie_id"));
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
@@ -138,12 +122,14 @@ public class ProdottoDAO {
     public void doSave(Prodotto prodotto) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO prodotto (nome, prezzo, tipo) VALUES (?, ?, ?)",
+                    "INSERT INTO prodotto (nome, prezzo, tipo,descrizione,url_image) VALUES (?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
             ps.setString(1, prodotto.getNome());
             ps.setDouble(2, prodotto.getPrezzo());
             ps.setInt(3, prodotto.getTipo());
+            ps.setString(4, prodotto.getDescrizione());
+            ps.setString(5, prodotto.getUrlImage());
             ps.executeUpdate();
 
             // Recupera il codice generato automaticamente
@@ -160,7 +146,7 @@ public class ProdottoDAO {
     public void doUpdate(Prodotto prodotto) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE prodotto SET nome=?, prezzo=?, tipo=? WHERE codice=?"
+                    "UPDATE prodotto SET nome=?, prezzo=?, tipo=? , descrizione=?, url_image=? WHERE codice=?"
             );
             ps.setString(1, prodotto.getNome());
             ps.setDouble(2, prodotto.getPrezzo());

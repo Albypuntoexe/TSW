@@ -1,7 +1,9 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,33 +13,68 @@ import model.dao.UserDAO;
 
 import java.io.IOException;
 
-@WebServlet(name = "LoginServlet", value = "/login")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Mostra la pagina di login
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        dispatcher.forward(request, response);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String ricordami = request.getParameter("ricordami");
+
+        if (username == null || password == null || username.trim().isEmpty() || password.trim().isEmpty()) {
+            response.sendRedirect("login.jsp?error=empty_fields");
+            return;
+        }
 
         UserDAO userDAO = new UserDAO();
         User user = userDAO.doRetrieveByUsernamePassword(username, password);
 
         if (user != null) {
-            // Utente trovato, salva in sessione
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            // Reindirizza alla home page (che ora è gestita da servlet)
-            response.sendRedirect(request.getContextPath() + "/");
-        } else {
-            // Utente non trovato, torna alla home con errore
-            response.sendRedirect(request.getContextPath() + "/?error=1");
-        }
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
+            // Gestione cookie "ricordami"
+            if ("si".equals(ricordami)) {
+                Cookie usernameCookie = new Cookie("saved_username", username);
+                Cookie passwordCookie = new Cookie("saved_password", password);
+
+                // Cookie durano 30 giorni
+                usernameCookie.setMaxAge(30 * 24 * 60 * 60);
+                passwordCookie.setMaxAge(30 * 24 * 60 * 60);
+
+                response.addCookie(usernameCookie);
+                response.addCookie(passwordCookie);
+            } else {
+                // Rimuovi i cookie se "ricordami" non è selezionato
+                Cookie usernameCookie = new Cookie("saved_username", "");
+                Cookie passwordCookie = new Cookie("saved_password", "");
+
+                usernameCookie.setMaxAge(0);
+                passwordCookie.setMaxAge(0);
+
+                response.addCookie(usernameCookie);
+                response.addCookie(passwordCookie);
+            }
+
+            // Se è admin, va alla pagina admin, altrimenti alla home
+            if (user.isAdmin()) {
+                response.sendRedirect("upload");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/");
+            }
+        } else {
+            response.sendRedirect("login.jsp?error=invalid_credentials");
+        }
     }
 }

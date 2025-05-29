@@ -4,35 +4,15 @@
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
+    <link rel="icon" href="<%=request.getContextPath()%>/img/favicon.ico" type="image/x-icon">
     <title>Adopta | Salva una specie</title>
 </head>
 
 <body>
-<!-- Navbar sticky con logo, menu e carrello -->
-<nav class="sticky-navbar">
-    <span class="logo">
-        <a href="index.jsp">
-            <img src="img/logo.png" alt="Logo">
-        </a>
-    </span>
-
-    <!-- Menu a tendina e carrello -->
-    <div class="nav-right">
-        <a href="carrello.jsp" class="cart-icon">
-            <img src="img/carrello.png" alt="Carrello">
-        </a>
-        <span class="dropdown">
-            <button class="dropbtn">☰</button>
-            <span class="dropdown-content">
-                <a href="area-personale.jsp">Area Personale</a>
-                <a href="ordini.jsp">Ordini</a>
-                <a href="contatti.jsp">Contatti</a>
-            </span>
-        </span>
-
-    </div>
-</nav>
+<!-- Include della navbar sticky -->
+<jsp:include page="stickynavbar.jsp" />
 
 <header class="header-background">
     <!-- Contenuto hero della pagina -->
@@ -62,8 +42,8 @@
     <div class="container">
         <div class="product-showcase">
             <div class="product-image">
-                <a href="prodotti.jsp">
-                    <img src="img/hero.jpg" alt="Kit Adozione Premium">
+                <a href="<%=request.getContextPath()%>/show-prodotti">
+                    <img src="<%=request.getContextPath()%>/img/hero.jpg" alt="Kit Adozione Premium">
                 </a>
             </div>
             <div class="product-info">
@@ -71,24 +51,24 @@
                 <p>Il nostro kit più completo include peluche personalizzato, foto dell'animale adottato, bracciale e molto altro.
                     Perfetto per fare la differenza e ricevere un ricordo tangibile del tuo contributo.</p>
                 <a href="#animali-container" class="cta-button">SCOPRI I KIT DISPONIBILI</a>
-            </div> <!-- ancora -->
+            </div>
         </div>
     </div>
 </section>
 
 <main class="main-content">
-    <!-- Lista animali dal database,Ogni animale avrà un link che passa il suo id come parametro nell'href -->
-    <span class="animali-container" id="animali-container">
-    <c:forEach var="animale" items="${specieAnimali}">
-        <span class="animale-card">
-            <a href="prodotto.jsp?id=${animale.id}">
-                <img src="${animale.urlImage}" alt="${animale.nome}" class="animale-img">
-            </a>
-            <h3>${animale.nome}</h3>
-            <button onclick="location.href='prodotto.jsp?id=${animale.id}'">SUPPORTA ORA</button>
-        </span>
-    </c:forEach>
-</span>
+    <!-- Lista animali dal database -->
+    <div class="animali-container" id="animali-container">
+        <c:forEach var="animale" items="${specieAnimali}">
+            <div class="animale-card">
+                <a href="<%=request.getContextPath()%>/prodotto?id=${animale.id}">
+                    <img src="<%=request.getContextPath()%>/${animale.urlImage}" alt="${animale.nome}" class="animale-img">
+                </a>
+                <h3>${animale.nome}</h3>
+                <button onclick="location.href='<%=request.getContextPath()%>/prodotto?id=${animale.id}'">SUPPORTA ORA</button>
+            </div>
+        </c:forEach>
+    </div>
 
     <!-- Sezione impatto delle donazioni -->
     <section class="impact-section">
@@ -159,44 +139,7 @@
     </div>
 </section>
 
-<!-- Footer della pagina -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Chi siamo</h3>
-                <p>Organizzazione dedicata alla protezione delle specie animali a rischio estinzione.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Link Utili</h3>
-                <ul class="footer-links">
-                    <li><a href="privacy.jsp">Privacy Policy</a></li>
-                    <li><a href="termini.jsp">Termini e Condizioni</a></li>
-                    <li><a href="spedizioni.jsp">Politica di Spedizione</a></li>
-                    <li><a href="contatti.jsp">Contatti</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contatti</h3>
-                <div class="contact-info">
-                    <p>📧 info@adopta.org</p>
-                    <p>📞 +39 341 145 3486</p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Supporta Specie a Rischio. Tutti i diritti riservati.</p>
-        </div>
-    </div>
-</footer>
-
-<script>
-    document.querySelector('.dropbtn').addEventListener('click', function () {
-        const dropdown = document.querySelector('.dropdown-content');
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    });
-</script>
+<!-- Include del footer -->
+<jsp:include page="footer.jsp" />
 </body>
 </html>
-
-

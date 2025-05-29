@@ -4,16 +4,17 @@ public class Prodotto {
     private String nome;
     private double prezzo;
     private int tipo; //true==bracciale false==peluche
-    private int codice;
+    private int codice,specieId;
     private String urlImage,descrizione;
 
-    public Prodotto(String nome, double prezzo, int tipo, int codice, String urlImage,String descrizione) {
+    public Prodotto(String nome, double prezzo, int tipo, int codice, String urlImage,String descrizione, int specieId) {
         this.nome = nome;
         this.prezzo = prezzo;
         this.tipo = tipo;
         this.codice = codice;
         this.urlImage = urlImage;
         this.descrizione = descrizione;
+        this.specieId = specieId;
     }
     public Prodotto() {}
     public String getNome() { return nome; }
@@ -28,4 +29,6 @@ public class Prodotto {
     public void setUrlImage(String urlImage) { this.urlImage = urlImage; }
     public String getDescrizione() { return descrizione; }
     public void setDescrizione(String descrizione) { this.descrizione = descrizione;}
+    public void setSpecieId(int id) { }
+    public int getSpecieId() { return specieId;}
 }

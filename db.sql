@@ -10,7 +10,7 @@ CREATE TABLE user (
     username VARCHAR(50) UNIQUE NOT NULL,
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
-    ruolo BOOLEAN NOT NULL DEFAULT 'FALSE' -- Aggiunto ruolo per distinguere utenti e amministratori
+    ruolo BOOLEAN NOT NULL DEFAULT false 
 );
 
 -- Tabella per le specie animali
@@ -71,8 +71,9 @@ CREATE TABLE orderitem (
 );
 
 INSERT INTO specie_animale (nome, descrizione, url_image) VALUES
-('Tigre', 'La tigre è il più grande felino vivente, nota per le sue strisce nere distintive e la sua forza.','images/tigre.jpg'),
-('Rinoceronte', 'Il rinoceronte è un grande mammifero perissodattilo, noto per il suo o i suoi corni sul naso.','/webapp/img/animali/rinoceronte.jpg'),
-('Leone', 'Il leone, spesso chiamato "re della giungla", è un grande felino caratterizzato dalla criniera nei maschi.', 'images/leone.jpg'),
-('Tartaruga', 'La tartaruga è un rettile con un guscio osseo o cartilagineo, noto per la sua longevità.', 'images/tartaruga.jpg'),
-('Elefante', 'L''elefante è il più grande animale terrestre, caratterizzato dalla sua proboscide e dalle grandi orecchie.', 'images/elefante.jpg');
+('Tigre', 'La tigre è il più grande felino vivente, nota per le sue strisce nere distintive e la sua forza.','img/animali/tigre.jpg'),
+('Rinoceronte', 'Il rinoceronte è un grande mammifero perissodattilo, noto per il suo o i suoi corni sul naso.','img/animali/rinoceronte.jpg'),
+('Leone', 'Il leone, spesso chiamato "re della giungla", è un grande felino caratterizzato dalla criniera nei maschi.', 'img/animali/leone.jpg'),
+('Tartaruga', 'La tartaruga è un rettile con un guscio osseo o cartilagineo, noto per la sua longevità.', 'img/animali/tartaruga.jpg'),
+('Elefante', 'L''elefante è il più grande animale terrestre, caratterizzato dalla sua proboscide e dalle grandi orecchie.', 'img/animali/elefante.jpg');
+

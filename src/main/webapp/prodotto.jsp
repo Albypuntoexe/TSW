@@ -12,26 +12,7 @@
 </head>
 <body>
 <!-- Navbar -->
-<nav class="sticky-navbar">
-    <span class="logo">
-        <a href="index.jsp">
-            <img src="img/logo.png" alt="Logo">
-        </a>
-    </span>
-  <div class="nav-right">
-    <a href="carrello.jsp" class="cart-icon">
-      <img src="img/carrello.png" alt="Carrello">
-    </a>
-    <span class="dropdown">
-            <button class="dropbtn">☰</button>
-            <span class="dropdown-content">
-                <a href="area-personale.jsp">Area Personale</a>
-                <a href="ordini.jsp">Ordini</a>
-                <a href="contatti.jsp">Contatti</a>
-            </span>
-        </span>
-  </div>
-</nav>
+<jsp:include page="stickynavbar.jsp" />
 
 <main class="main-content">
   <%
@@ -65,35 +46,7 @@
   </section>
 </main>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Chi siamo</h3>
-        <p>Organizzazione dedicata alla protezione delle specie animali a rischio estinzione.</p>
-      </div>
-      <div class="footer-section">
-        <h3>Link Utili</h3>
-        <ul class="footer-links">
-          <li><a href="privacy.jsp">Privacy Policy</a></li>
-          <li><a href="termini.jsp">Termini e Condizioni</a></li>
-          <li><a href="spedizioni.jsp">Politica di Spedizione</a></li>
-          <li><a href="contatti.jsp">Contatti</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Contatti</h3>
-        <div class="contact-info">
-          <p>📧 info@adopta.org</p>
-          <p>📞 +39 341 145 3486</p>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Supporta Specie a Rischio. Tutti i diritti riservati.</p>
-    </div>
-  </div>
-</footer>
+<jsp:include page="footer.jsp" />
+
 </body>
 </html>
