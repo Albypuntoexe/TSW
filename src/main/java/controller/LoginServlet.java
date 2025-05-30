@@ -44,6 +44,11 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 
+
+            System.out.println("User logged in: " + user.getUsername());
+            System.out.println("Session ID: " + session.getId());
+            System.out.println("Is admin: " + user.isAdmin());
+
             // Gestione cookie "ricordami"
             if ("si".equals(ricordami)) {
                 Cookie usernameCookie = new Cookie("saved_username", username);
@@ -66,15 +71,10 @@ public class LoginServlet extends HttpServlet {
                 response.addCookie(usernameCookie);
                 response.addCookie(passwordCookie);
             }
-
-            // Se è admin, va alla pagina admin, altrimenti alla home
-            if (user.isAdmin()) {
-                response.sendRedirect("upload");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/");
-            }
+            //redirect alla home con messaggio di login riuscito
+            response.sendRedirect("index.jsp?login=success");
         } else {
-            response.sendRedirect("login.jsp?error=invalid_credentials");
+            response.sendRedirect("login.jsp?error=credenziali_errate");
         }
     }
 }

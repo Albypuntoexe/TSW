@@ -10,7 +10,7 @@ public class User {
     private String username;
     private String nome;
     private String cognome;
-    private boolean admin = false;
+    private boolean admin = false; /*todo risolvi problema admin nel db*/
 
     public User() {}
     public User(String email, String telefono, String password, String username, String nome, String cognome) {

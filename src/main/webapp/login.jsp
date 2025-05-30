@@ -40,7 +40,10 @@
   if (success != null && success.equals("registered")) {
     successMessage = "Registrazione completata con successo!";
   }
-%>
+  if("success".equals(request.getParameter("login"))) {
+%><div class="alert alert-success">Login effettuato con successo!</div>
+  <% } %>
+<!-- todo aggiustare il fatto che viene coperto da navbar ^^^^^^^^^^^^^^^^-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -51,16 +54,7 @@
   <link rel="icon" href="<%=request.getContextPath()%>/img/favicon.ico" type="image/x-icon">
   <title>Accedi | Adopta</title>
 <body>
-<!-- Include della navbar -->
 <jsp:include page="stickynavbar.jsp" />
-
-<div class="login-container">
-  <!-- Pulsanti per switch tra login e registrazione -->
-  <div class="switch-buttons">
-    <button type="button" class="switch-btn active" id="loginSwitch">ACCEDI</button>
-    <button type="button" class="switch-btn" id="registerSwitch">REGISTRATI</button>
-  </div>
-
   <!-- Messaggi di errore/successo -->
   <% if (!errorMessage.isEmpty()) { %>
   <div class="alert alert-danger">

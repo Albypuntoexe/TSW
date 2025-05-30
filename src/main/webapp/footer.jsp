@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-content">

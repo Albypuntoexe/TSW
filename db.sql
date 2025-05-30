@@ -77,3 +77,4 @@ INSERT INTO specie_animale (nome, descrizione, url_image) VALUES
 ('Tartaruga', 'La tartaruga è un rettile con un guscio osseo o cartilagineo, noto per la sua longevità.', 'img/animali/tartaruga.jpg'),
 ('Elefante', 'L''elefante è il più grande animale terrestre, caratterizzato dalla sua proboscide e dalle grandi orecchie.', 'img/animali/elefante.jpg');
 
+select * from user;
