@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import model.dao.UserDAO;
 
 public class User {
     private String email,telefono;
@@ -10,13 +11,13 @@ public class User {
     private String username;
     private String nome;
     private String cognome;
-    private boolean admin = false; /*todo risolvi problema admin nel db*/
+    private boolean admin = false;
 
     public User() {}
     public User(String email, String telefono, String password, String username, String nome, String cognome) {
         this.email = email;
         this.telefono = telefono;
-        setPasswordSHA(password);
+        this.password=password;
         this.username = username;
         this.nome = nome;
         this.cognome = cognome;
@@ -34,19 +35,5 @@ public class User {
     public String getPassword() { return password; } //a quanto pare anche se è cifrata funziona secondo claude
     public boolean isAdmin() {return admin;}
     public void setAdmin(boolean admin) {this.admin = admin;}
-
-    public void setPasswordSHA(String password)
-    {
-        try
-        {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.reset();
-            digest.update(password.getBytes(StandardCharsets.UTF_8));
-            this.password = String.format("%040x", new BigInteger(1, digest.digest()));
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
+    public void setPassword(String password) {this.password = password;} //l'hash
 }

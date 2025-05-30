@@ -77,4 +77,7 @@ INSERT INTO specie_animale (nome, descrizione, url_image) VALUES
 ('Tartaruga', 'La tartaruga è un rettile con un guscio osseo o cartilagineo, noto per la sua longevità.', 'img/animali/tartaruga.jpg'),
 ('Elefante', 'L''elefante è il più grande animale terrestre, caratterizzato dalla sua proboscide e dalle grandi orecchie.', 'img/animali/elefante.jpg');
 
+insert into user (email,telefono,password,username,nome,cognome,ruolo) values
+('alby@gmail.com','3483795240','2bc6531dcdf39d407454e9d995d897571aca980d20a46aa832d608ea126576ec57344c29b377d2714a7d6e54e08544a08b601158fff7d2aef042583680f37beb','alby','alberto','russo',true);
+
 select * from user;

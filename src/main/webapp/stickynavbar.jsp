@@ -31,8 +31,7 @@
                     <a href="<%=request.getContextPath()%>/ordini.jsp">I miei Ordini</a>
                     <a href="<%=request.getContextPath()%>/contatti.jsp">Contatti</a>
                     <% if (isAdmin) { %>
-                        <a href="<%=request.getContextPath()%>/admin-upload.jsp">Pannello Modifica</a>
-                        <a href="<%=request.getContextPath()%>/ordinazioni.jsp">Pannello Ordinazioni</a>
+                         <a href="<%=request.getContextPath()%>/admin/permissions">Pannello Amministratore</a>
                     <% } %>
                     <a href="<%=request.getContextPath()%>/logout">Logout</a>
                 <% } else { %>

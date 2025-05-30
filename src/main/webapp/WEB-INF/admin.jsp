@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="userDAO" class="model.dao.UserDAO" scope="page" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<%@ include file="/stickynavbar.jsp" %>
+
 <header>
   <h1>Pannello Amministratore</h1>
   <nav>
@@ -81,6 +84,71 @@
     </div>
   </form>
 
+  <!-- NUOVA SEZIONE GESTIONE PERMESSI ADMIN -->
+  <h2>Gestione Permessi Admin</h2>
+  <p>Qui puoi promuovere o retrocedere gli utenti a amministratori.</p>
+
+  <!-- Recupero degli utenti direttamente nella JSP -->
+  <c:set var="users" value="${userDAO.doRetrieveAll()}" />
+
+  <!-- Messaggi di stato -->
+  <c:if test="${not empty param.success}">
+    <c:choose>
+      <c:when test="${param.success == 'user_promoted'}">
+        <div style="color: green;">Utente promosso ad amministratore con successo!</div>
+      </c:when>
+      <c:when test="${param.success == 'user_demoted'}">
+        <div style="color: green;">Permessi admin rimossi con successo!</div>
+      </c:when>
+    </c:choose>
+  </c:if>
+
+  <c:if test="${not empty param.error}">
+    <c:choose>
+      <c:when test="${param.error == 'cannot_demote_self'}">
+        <div style="color: red;">Non puoi rimuovere i tuoi stessi permessi da admin!</div>
+      </c:when>
+      <c:when test="${param.error == 'update_failed'}">
+        <div style="color: red;">Errore durante l'aggiornamento dei permessi.</div>
+      </c:when>
+    </c:choose>
+  </c:if>
+
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Attualmente Admin</th>
+      <th>Azioni</th>
+    </tr>
+    <c:forEach items="${users}" var="user">
+      <tr>
+        <td>${user.email}</td>
+        <td>${user.admin ? 'Sì' : 'No'}</td>
+        <td>
+          <c:choose>
+            <c:when test="${user.admin}">
+              <c:if test="${user.email != sessionScope.user.email}">
+                <form action="${pageContext.request.contextPath}/admin/permissions" method="post">
+                  <input type="hidden" name="action" value="demote">
+                  <input type="hidden" name="userEmail" value="${user.email}">
+                  <button type="submit">Rimuovi Admin</button>
+                </form>
+              </c:if>
+            </c:when>
+            <c:otherwise>
+              <form action="${pageContext.request.contextPath}/admin/permissions" method="post">
+                <input type="hidden" name="action" value="promote">
+                <input type="hidden" name="userEmail" value="${user.email}">
+                <button type="submit">Rendi Admin</button>
+              </form>
+            </c:otherwise>
+          </c:choose>
+        </td>
+      </tr>
+    </c:forEach>
+  </table>
+  <!-- FINE NUOVA SEZIONE -->
+
   <hr>
 
   <h3>Informazioni</h3>
@@ -91,6 +159,8 @@
     <li>Dopo l'aggiunta, la cache delle specie animali verrà aggiornata automaticamente</li>
   </ul>
 </main>
+
+<%@ include file="/footer.jsp" %>
 
 <script>
   // Validazione client-side per migliorare UX

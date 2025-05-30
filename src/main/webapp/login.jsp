@@ -3,15 +3,11 @@
   // Gestione dei cookie per "ricordami"
   Cookie[] cookies = request.getCookies();
   String savedUsername = "";
-  String savedPassword = "";
 
   if (cookies != null) {
     for (Cookie c : cookies) {
       if (c.getName().equals("saved_username")) {
         savedUsername = c.getValue();
-      }
-      if (c.getName().equals("saved_password")) {
-        savedPassword = c.getValue();
       }
     }
   }
@@ -81,8 +77,7 @@
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="form-control"
-               placeholder="La tua password" required value="<%=savedPassword%>">
+        <input type="password" name="password" id="password" class="form-control">
       </div>
 
       <div class="form-check">
