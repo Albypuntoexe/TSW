@@ -73,7 +73,7 @@ public class SpecieAnimaleDAO {
     public void doSave(SpecieAnimale specieAnimale) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO specie_animale (nome, descrizione, url_image) VALUES (?, ?, ?, ?)",
+                    "INSERT INTO specie_animale (nome, descrizione, url_image) VALUES (?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
             ps.setString(1, specieAnimale.getNome());

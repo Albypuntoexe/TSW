@@ -3,7 +3,7 @@ package model.beans;
 public class Prodotto {
     private String nome;
     private double prezzo;
-    private int tipo; //true==bracciale false==peluche
+    private int tipo; //1 = Standard, 2 = Premium
     private int codice,specieId;
     private String urlImage,descrizione;
 
@@ -29,6 +29,6 @@ public class Prodotto {
     public void setUrlImage(String urlImage) { this.urlImage = urlImage; }
     public String getDescrizione() { return descrizione; }
     public void setDescrizione(String descrizione) { this.descrizione = descrizione;}
-    public void setSpecieId(int id) { }
+    public void setSpecieId(int id) { this.specieId = id; }
     public int getSpecieId() { return specieId;}
 }

@@ -9,7 +9,6 @@
             <div class="footer-section">
                 <h3>Link Utili</h3>
                 <ul class="footer-links">
-                    <li><a href="privacy.jsp">Privacy Policy</a></li>
                     <li><a href="termini.jsp">Termini e Condizioni</a></li>
                     <li><a href="spedizioni.jsp">Politica di Spedizione</a></li>
                     <li><a href="contatti.jsp">Contatti</a></li>
@@ -18,8 +17,8 @@
             <div class="footer-section">
                 <h3>Contatti</h3>
                 <div class="contact-info">
-                    <p>📧 info@adopta.org</p>
-                    <p>📞 +39 341 145 3486</p>
+                    <p>Email: info@adopta.org</p>
+                    <p>Telefono: +39 341 145 3486</p>
                 </div>
             </div>
         </div>

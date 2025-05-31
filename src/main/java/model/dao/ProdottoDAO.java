@@ -119,17 +119,19 @@ public class ProdottoDAO {
     }
 
     // Salva un nuovo prodotto
+// Correzione del metodo doSave() in ProdottoDAO.java
     public void doSave(Prodotto prodotto) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO prodotto (nome, prezzo, tipo,descrizione,url_image) VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO prodotto (specie_id, nome, prezzo, tipo, descrizione, url_image) VALUES (?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
-            ps.setString(1, prodotto.getNome());
-            ps.setDouble(2, prodotto.getPrezzo());
-            ps.setInt(3, prodotto.getTipo());
-            ps.setString(4, prodotto.getDescrizione());
-            ps.setString(5, prodotto.getUrlImage());
+            ps.setInt(1, prodotto.getSpecieId());        // AGGIUNTO: specie_id
+            ps.setString(2, prodotto.getNome());
+            ps.setDouble(3, prodotto.getPrezzo());
+            ps.setInt(4, prodotto.getTipo());
+            ps.setString(5, prodotto.getDescrizione());
+            ps.setString(6, prodotto.getUrlImage());
             ps.executeUpdate();
 
             // Recupera il codice generato automaticamente
@@ -142,16 +144,19 @@ public class ProdottoDAO {
         }
     }
 
-    // Aggiorna un prodotto esistente
+    // Correzione del metodo doUpdate()
     public void doUpdate(Prodotto prodotto) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "UPDATE prodotto SET nome=?, prezzo=?, tipo=? , descrizione=?, url_image=? WHERE codice=?"
+                    "UPDATE prodotto SET specie_id=?, nome=?, prezzo=?, tipo=?, descrizione=?, url_image=? WHERE codice=?"
             );
-            ps.setString(1, prodotto.getNome());
-            ps.setDouble(2, prodotto.getPrezzo());
-            ps.setInt(3, prodotto.getTipo());
-            ps.setInt(4, prodotto.getCodice());
+            ps.setInt(1, prodotto.getSpecieId());     // AGGIUNTO: specie_id
+            ps.setString(2, prodotto.getNome());
+            ps.setDouble(3, prodotto.getPrezzo());
+            ps.setInt(4, prodotto.getTipo());
+            ps.setString(5, prodotto.getDescrizione());
+            ps.setString(6, prodotto.getUrlImage());
+            ps.setInt(7, prodotto.getCodice());       // CORRETTO: posizione del codice
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

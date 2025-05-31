@@ -48,13 +48,15 @@ public class UploadServlet extends HttpServlet {
             // Recupera i dati del form
             String nomeAnimale = request.getParameter("nomeAnimale");
             String descrizioneAnimale = request.getParameter("descrizioneAnimale");
+            String descrizioneStandard = request.getParameter("descrizioneStandard");
+            String descrizionePremium = request.getParameter("descrizionePremium");
             double prezzoStandard = Double.parseDouble(request.getParameter("prezzoStandard"));
             double prezzoPremium = Double.parseDouble(request.getParameter("prezzoPremium"));
 
             // Recupera i file
-            Part immaginePrincipale = request.getPart("immaginePrincipale");
-            Part immagineProdottoStandard = request.getPart("immagineProdottoStandard");
-            Part immagineProdottoPremium = request.getPart("immagineProdottoPremium");
+            Part immaginePrincipale = request.getPart("fotoAnimale");
+            Part immagineProdottoStandard = request.getPart("fotoStandard");
+            Part immagineProdottoPremium = request.getPart("fotoPremium");
 
             // Percorsi per le immagini
             // getRealPath(String path): Questo metodo del ServletContext prende un percorso relativo
@@ -95,7 +97,7 @@ public class UploadServlet extends HttpServlet {
             prodottoStandard.setNome("Kit Standard - " + nomeAnimale);
             prodottoStandard.setPrezzo(prezzoStandard);
             prodottoStandard.setTipo(1); // 1 = Standard
-            prodottoStandard.setDescrizione("Foto dell'animale adottato, bracciale e certificato di adozione");
+            prodottoStandard.setDescrizione(descrizioneStandard);
             prodottoStandard.setUrlImage(urlImageProdottoStandard);
             prodottoDAO.doSave(prodottoStandard);
 
@@ -105,33 +107,34 @@ public class UploadServlet extends HttpServlet {
             prodottoPremium.setNome("Kit Premium - " + nomeAnimale);
             prodottoPremium.setPrezzo(prezzoPremium);
             prodottoPremium.setTipo(2); // 2 = Premium
-            prodottoPremium.setDescrizione("Peluche personalizzato, foto dell'animale adottato, bracciale e certificato di adozione");
+            prodottoPremium.setDescrizione(descrizionePremium);
             prodottoPremium.setUrlImage(urlImageProdottoPremium);
             prodottoDAO.doSave(prodottoPremium);
 
             // Aggiorna il ServletContext con le nuove specie
             refreshSpecieAnimaliContext();
 
-            response.sendRedirect(request.getContextPath() + "/?success=upload");
+            request.setAttribute("success", "upload");
+            request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/admin-upload.jsp?error=upload_failed");
-        }
+            request.setAttribute("error", "upload");
+            request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);        }
     }
 
     private String saveFile(Part filePart, String uploadPath) throws IOException {
         String fileName = extractFileName(filePart);
-        String uniqueFileName = generateUniqueFileName(fileName, uploadPath);
 
-        Path destinationPath = Paths.get(uploadPath, uniqueFileName);
+        Path destinationPath = Paths.get(uploadPath, fileName);
 
         try (InputStream inputStream = filePart.getInputStream()) {
             Files.copy(inputStream, destinationPath, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        return uniqueFileName;
+        return fileName;
     }
+
 
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
@@ -142,21 +145,6 @@ public class UploadServlet extends HttpServlet {
             }
         }
         return "";
-    }
-
-    private String generateUniqueFileName(String originalFileName, String uploadPath) {
-        String name = originalFileName.substring(0, originalFileName.lastIndexOf('.'));
-        String extension = originalFileName.substring(originalFileName.lastIndexOf('.'));
-
-        String uniqueFileName = originalFileName;
-        int counter = 1;
-
-        while (Files.exists(Paths.get(uploadPath, uniqueFileName))) {
-            uniqueFileName = name + "_" + counter + extension;
-            counter++;
-        }
-
-        return uniqueFileName;
     }
 
     private void createDirectoryIfNotExists(String path) {

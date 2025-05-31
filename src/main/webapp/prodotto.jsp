@@ -7,7 +7,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   <title>Dettagli Animale</title>
 </head>
 <body>
@@ -22,13 +22,17 @@
 
     SpecieAnimale animale = animaleDAO.doRetrieveById(id);
     List<Prodotto> prodotti = prodottoDAO.doRetrieveBySpecieId(id);
+
+    // Imposta attributi per JSTL
+    request.setAttribute("animale", animale);
+    request.setAttribute("prodotti", prodotti);
   %>
 
   <!-- Dettagli dell'animale -->
   <section class="animale-dettagli">
-    <h1><%= animale.getNome() %></h1>
-    <p><%= animale.getDescrizione() %></p>
-    <img src="<%= animale.getUrlImage() %>" alt="<%= animale.getNome() %>" class="animale-img">
+    <h1>${animale.nome}</h1>
+    <p>${animale.descrizione}</p>
+    <img src="${pageContext.request.contextPath}/${animale.urlImage}" alt="${animale.nome}" class="animale-img">
   </section>
 
   <!-- Prodotti dell'animale -->
@@ -36,7 +40,7 @@
     <h2>Kit Disponibili</h2>
     <c:forEach var="prodotto" items="${prodotti}">
       <div class="prodotto-card">
-        <img src="${prodotto.urlImage}" alt="${prodotto.nome}" class="prodotto-img">
+        <img src="${pageContext.request.contextPath}/${prodotto.urlImage}" alt="${prodotto.nome}" class="prodotto-img">
         <h3>${prodotto.nome}</h3>
         <p>${prodotto.descrizione}</p>
         <p>Prezzo: €${prodotto.prezzo}</p>
@@ -47,6 +51,5 @@
 </main>
 
 <jsp:include page="footer.jsp" />
-
 </body>
 </html>
