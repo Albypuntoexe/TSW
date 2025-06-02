@@ -79,3 +79,18 @@ INSERT INTO specie_animale (nome, descrizione, url_image) VALUES
 
 insert into user (email,telefono,password,username,nome,cognome,ruolo) values
 ('alby@gmail.com','3483795240','2bc6531dcdf39d407454e9d995d897571aca980d20a46aa832d608ea126576ec57344c29b377d2714a7d6e54e08544a08b601158fff7d2aef042583680f37beb','alby','alberto','russo',true);
+
+-- Inserimento prodotti
+INSERT INTO prodotto (specie_id, nome, prezzo, tipo, descrizione, url_image) VALUES
+(1, 'Prodotto Standard Tigre', 25.00, 1, 'Foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/tigre-standard.jpg'),
+(1, 'Prodotto Premium Tigre', 45.00, 2, 'Peluche personalizzato, foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/tigre-premium.jpg'),
+(2, 'Prodotto Standard Rinoceronte', 25.00, 1, 'Foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/rinoceronte-standard.jpg'),
+(2, 'Prodotto Premium Rinoceronte', 45.00, 2, 'Peluche personalizzato, foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/rinoceronte-premium.jpg'),
+(3, 'Prodotto Standard Leone', 25.00, 1, 'Foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/leone-standard.jpg'),
+(3, 'Prodotto Premium Leone', 45.00, 2, 'Peluche personalizzato, foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/leone-premium.jpg'),
+(4, 'Prodotto Standard Tartaruga', 25.00, 1, 'Foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/tartaruga-standard.jpg'),
+(4, 'Prodotto Premium Tartaruga', 45.00, 2, 'Peluche personalizzato, foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/tartaruga-premium.jpg'),
+(5, 'Prodotto Standard Elefante', 25.00, 1, 'Foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/elefante-standard.jpg'),
+(5, 'Prodotto Premium Elefante', 45.00, 2, 'Peluche personalizzato, foto dell''animale adottato, bracciale e certificato di adozione', 'img/prodotti/elefante-premium.jpg');
+
+

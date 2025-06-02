@@ -145,6 +145,83 @@
     </c:forEach>
   </table>
 
+  <!-- NUOVA SEZIONE GESTIONE PRODOTTI -->
+  <h2>Gestione Prodotti delle Specie</h2>
+  <p>Qui puoi modificare i prodotti Standard e Premium associati a ogni specie animale.</p>
+
+  <!-- Recupero dei prodotti direttamente nella JSP -->
+  <jsp:useBean id="prodottoDAO" class="model.dao.ProdottoDAO" scope="page" />
+
+  <c:forEach items="${specieAnimali}" var="specie">
+    <h3>Prodotti per: ${specie.nome}</h3>
+
+    <!-- Recupera i prodotti per questa specie -->
+    <c:set var="prodottiSpecie" value="${prodottoDAO.doRetrieveBySpecieId(specie.id)}" />
+
+    <c:if test="${not empty prodottiSpecie}">
+      <table class="admin-table">
+        <tr>
+          <th>Tipo</th>
+          <th>Nome</th>
+          <th>Prezzo (€)</th>
+          <th>Descrizione</th>
+          <th>Immagine</th>
+          <th>Azioni</th>
+        </tr>
+
+        <c:forEach items="${prodottiSpecie}" var="prodotto">
+          <tr>
+            <td>
+              <c:choose>
+                <c:when test="${prodotto.tipo == 1}">Standard</c:when>
+                <c:when test="${prodotto.tipo == 2}">Premium</c:when>
+                <c:otherwise>Altro</c:otherwise>
+              </c:choose>
+            </td>
+            <td>
+              <input type="text" name="nome_${prodotto.codice}" value="${prodotto.nome}"
+                     form="updateProdottoForm_${prodotto.codice}" required>
+            </td>
+            <td>
+              <input type="number" name="prezzo_${prodotto.codice}" value="${prodotto.prezzo}"
+                     form="updateProdottoForm_${prodotto.codice}" min="0" step="0.01" required>
+            </td>
+            <td>
+            <textarea name="descrizione_${prodotto.codice}"
+                      form="updateProdottoForm_${prodotto.codice}"
+                      rows="3" cols="30">${prodotto.descrizione}</textarea>
+            </td>
+            <td>
+              <img src="${prodotto.urlImage}" height="50" alt="Immagine prodotto">
+              <br>
+              <input type="file" name="nuovaImmagine_${prodotto.codice}"
+                     form="updateProdottoForm_${prodotto.codice}" accept="image/*">
+              <small>Lascia vuoto per mantenere l'immagine attuale</small>
+            </td>
+            <td>
+              <!-- Form per l'update del prodotto -->
+              <form id="updateProdottoForm_${prodotto.codice}" action="doUpdateProdotto" method="post"
+                    enctype="multipart/form-data">
+                <input type="hidden" name="codice" value="${prodotto.codice}">
+                <input type="hidden" name="specieId" value="${prodotto.specieId}">
+                <input type="hidden" name="tipo" value="${prodotto.tipo}">
+                <button type="submit">Aggiorna Prodotto</button>
+              </form>
+            </td>
+          </tr>
+        </c:forEach>
+      </table>
+    </c:if>
+
+    <c:if test="${empty prodottiSpecie}">
+      <p>Nessun prodotto trovato per questa specie.</p>
+    </c:if>
+
+    <hr>
+    <hr>
+  </c:forEach>
+  <!-- FINE NUOVA SEZIONE GESTIONE PRODOTTI -->
+
 
   <!-- NUOVA SEZIONE GESTIONE PERMESSI ADMIN -->
   <h2>Gestione Permessi Admin</h2>

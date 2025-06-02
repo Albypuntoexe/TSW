@@ -43,7 +43,7 @@
         <div class="product-showcase">
             <div class="product-image">
                 <a href="<%=request.getContextPath()%>/show-prodotti">
-                    <img src="<%=request.getContextPath()%>/img/hero.jpg" alt="Kit Adozione Premium">
+                    <img src="<%=request.getContextPath()%>/img/hero.png" alt="Kit Adozione Premium">
                 </a>
             </div>
             <div class="product-info">
