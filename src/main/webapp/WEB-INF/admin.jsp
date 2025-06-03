@@ -121,7 +121,7 @@
                           rows="2">${specie.descrizione}</textarea>
         </td>
         <td>
-          <img src="${specie.urlImage}" height="50">
+          <img src="${pageContext.request.contextPath}/${specie.urlImage}" height="50">
           <input type="file" name="nuovaImmagine_${specie.id}"
                  form="updateForm_${specie.id}" accept="image/*">
         </td>
@@ -192,7 +192,7 @@
                       rows="3" cols="30">${prodotto.descrizione}</textarea>
             </td>
             <td>
-              <img src="${prodotto.urlImage}" height="50" alt="Immagine prodotto">
+              <img src="${pageContext.request.contextPath}/${prodotto.urlImage}" height="50" alt="Immagine prodotto">
               <br>
               <input type="file" name="nuovaImmagine_${prodotto.codice}"
                      form="updateProdottoForm_${prodotto.codice}" accept="image/*">
