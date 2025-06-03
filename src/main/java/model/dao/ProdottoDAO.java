@@ -20,6 +20,8 @@ public class ProdottoDAO {
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
+                p.setDescrizione(rs.getString("descrizione"));
+                p.setUrlImage(rs.getString("url_image"));
                 prodotti.add(p);
             }
             return prodotti;
@@ -66,6 +68,8 @@ public class ProdottoDAO {
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
                 p.setSpecieId(rs.getInt("specie_id"));
+                p.setDescrizione(rs.getString("descrizione"));
+                p.setUrlImage(rs.getString("url_image"));
                 return p;
             }
             return null;
@@ -88,6 +92,8 @@ public class ProdottoDAO {
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
+                p.setDescrizione(rs.getString("descrizione"));
+                p.setUrlImage(rs.getString("url_image"));
                 prodotti.add(p);
             }
             return prodotti;
@@ -110,6 +116,8 @@ public class ProdottoDAO {
                 p.setNome(rs.getString("nome"));
                 p.setPrezzo(rs.getDouble("prezzo"));
                 p.setTipo(rs.getInt("tipo"));
+                p.setDescrizione(rs.getString("descrizione"));
+                p.setUrlImage(rs.getString("url_image"));
                 prodotti.add(p);
             }
             return prodotti;

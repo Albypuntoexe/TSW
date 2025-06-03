@@ -19,7 +19,7 @@ public class OrderDAO {
             while (rs.next()) {
                 Order o = new Order();
                 o.setId(rs.getInt("id"));
-                o.setUserId(rs.getInt("user_id"));
+                o.setUserId(rs.getString("user_id"));
                 o.setDataOrdine(new Date(rs.getTimestamp("data_ordine").getTime()));
                 o.setPrezzo(rs.getDouble("prezzo"));
                 o.setSpedito(rs.getBoolean("spedito"));
@@ -53,7 +53,7 @@ public class OrderDAO {
             if (rs.next()) {
                 Order o = new Order();
                 o.setId(rs.getInt("id"));
-                o.setUserId(rs.getInt("user_id"));
+                o.setUserId(rs.getString("user_id"));
                 o.setDataOrdine(new Date(rs.getTimestamp("data_ordine").getTime()));
                 o.setPrezzo(rs.getDouble("prezzo"));
                 o.setSpedito(rs.getBoolean("spedito"));
@@ -79,16 +79,16 @@ public class OrderDAO {
     }
 
     // Recupera ordini per userId
-    public List<Order> doRetrieveByUserId(int userId) {
+    public List<Order> doRetrieveByUserId(String userId) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM orders WHERE user_id=? ORDER BY data_ordine DESC");
-            ps.setInt(1, userId);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM orders WHERE user_id=?");
+            ps.setString(1, userId);
             ResultSet rs = ps.executeQuery();
             List<Order> ordini = new ArrayList<>();
             while (rs.next()) {
                 Order o = new Order();
                 o.setId(rs.getInt("id"));
-                o.setUserId(rs.getInt("user_id"));
+                o.setUserId(rs.getString("user_id"));
                 o.setDataOrdine(new Date(rs.getTimestamp("data_ordine").getTime()));
                 o.setPrezzo(rs.getDouble("prezzo"));
                 o.setSpedito(rs.getBoolean("spedito"));
@@ -158,7 +158,7 @@ public class OrderDAO {
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
-            ps.setInt(1, order.getUserId());
+            ps.setString(1, order.getUserId());
             ps.setTimestamp(2, new Timestamp(order.getDataOrdine().getTime()));
             ps.setDouble(3, order.getPrezzo());
             ps.setBoolean(4, order.isSpedito());

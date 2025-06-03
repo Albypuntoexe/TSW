@@ -90,7 +90,6 @@ public class UploadServlet extends HttpServlet {
             specie.setUrlImage(urlImageAnimale);
             specieDAO.doSave(specie);
 
-            /* todo da rivedere la set.descrizione*/
             // Crea prodotto Standard
             Prodotto prodottoStandard = new Prodotto();
             prodottoStandard.setSpecieId(specie.getId());

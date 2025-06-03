@@ -70,6 +70,15 @@ CREATE TABLE orderitem (
     FOREIGN KEY (prodotto_codice) REFERENCES prodotto(codice) ON DELETE CASCADE
 );
 
+CREATE TABLE incassi (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    totale_incassato DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    ultimo_aggiornamento TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Inserisci il record iniziale
+INSERT INTO incassi (totale_incassato) VALUES (0.00);
+
 INSERT INTO specie_animale (nome, descrizione, url_image) VALUES
 ('Tigre', 'La tigre è il più grande felino vivente, nota per le sue strisce nere distintive e la sua forza.','img/animali/tigre.jpg'),
 ('Rinoceronte', 'Il rinoceronte è un grande mammifero perissodattilo, noto per il suo o i suoi corni sul naso.','img/animali/rinoceronte.jpg'),

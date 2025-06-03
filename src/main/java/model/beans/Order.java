@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
     private int id;
-    private int userId;
+    private String userId; //sarebbe l'email
     private Date dataOrdine;
     private double prezzo;
     private boolean spedito, ricevuto;
@@ -21,8 +21,8 @@ public class Order {
     // Getter e setter
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
     public Date getDataOrdine() { return dataOrdine; }
     public void setDataOrdine(Date dataOrdine) { this.dataOrdine = dataOrdine; }
     public double getPrezzo() { return prezzo; }
