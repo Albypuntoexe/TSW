@@ -89,11 +89,30 @@
         <h3>Totale: €<%=String.format("%.2f", ordine.getPrezzo())%></h3>
       </div>
     </div>
+    <!-- Aggiungi dopo il div del totale -->
+    <div>
+      <% if (!ordine.isSpedito() && !ordine.isRicevuto()) { %>
+      <form action="<%=request.getContextPath()%>/user/orders" method="post" style="display:inline;">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="orderId" value="<%=ordine.getId()%>">
+        <button type="submit" onclick="return confirm('Sei sicuro di voler eliminare questo ordine?')">
+          Elimina Ordine
+        </button>
+      </form>
+      <% } else if (ordine.isSpedito() && !ordine.isRicevuto()) { %>
+      <form action="<%=request.getContextPath()%>/user/orders" method="post" style="display:inline;">
+        <input type="hidden" name="action" value="receive">
+        <input type="hidden" name="orderId" value="<%=ordine.getId()%>">
+        <button type="submit">Conferma Ricezione</button>
+      </form>
+      <% } %>
+    </div>
     <% } %>
   </div>
   <%
       }
   %>
+
 </main>
 
 <jsp:include page="footer.jsp" />

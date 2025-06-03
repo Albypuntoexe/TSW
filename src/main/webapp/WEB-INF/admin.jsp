@@ -286,6 +286,62 @@
   </table>
   <!-- FINE NUOVA SEZIONE -->
 
+  <!-- NUOVA SEZIONE GESTIONE ORDINI -->
+  <h2>Gestione Ordini</h2>
+  <p>Qui puoi visualizzare tutti gli ordini effettuati e gestire le spedizioni.</p>
+
+  <!-- Recupero degli ordini direttamente nella JSP -->
+  <jsp:useBean id="orderDAO" class="model.dao.OrderDAO" scope="page" />
+
+  <c:set var="allOrders" value="${orderDAO.doRetrieveAll()}" />
+
+  <c:if test="${not empty allOrders}">
+    <table class="admin-table">
+      <tr>
+        <th>ID Ordine</th>
+        <th>Utente</th>
+        <th>Data</th>
+        <th>Totale</th>
+        <th>Stato</th>
+        <th>Indirizzo</th>
+        <th>Azioni</th>
+      </tr>
+      <c:forEach items="${allOrders}" var="order">
+        <tr>
+          <td>${order.id}</td>
+          <td>${order.userId}</td>
+          <td>${order.dataOrdine}</td>
+          <td>€${order.prezzo}</td>
+          <td>
+            <c:choose>
+              <c:when test="${order.ricevuto}">✓ Ricevuto</c:when>
+              <c:when test="${order.spedito}">📦 Spedito</c:when>
+              <c:otherwise>⏳ In elaborazione</c:otherwise>
+            </c:choose>
+          </td>
+          <td>
+              ${order.indirizzoSpedizione.via}<br>
+              ${order.indirizzoSpedizione.citta}, ${order.indirizzoSpedizione.provincia} ${order.indirizzoSpedizione.cap}
+          </td>
+          <td>
+            <c:if test="${!order.spedito && !order.ricevuto}">
+              <form action="${pageContext.request.contextPath}/admin/orders" method="post" style="display:inline;">
+                <input type="hidden" name="action" value="ship">
+                <input type="hidden" name="orderId" value="${order.id}">
+                <button type="submit">Spedisci</button>
+              </form>
+            </c:if>
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
+  </c:if>
+
+  <c:if test="${empty allOrders}">
+    <p>Nessun ordine presente nel sistema.</p>
+  </c:if>
+  <!-- FINE NUOVA SEZIONE GESTIONE ORDINI -->
+
   <hr>
 
   <h3>Informazioni</h3>

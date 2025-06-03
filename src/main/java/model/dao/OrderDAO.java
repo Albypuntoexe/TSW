@@ -258,15 +258,39 @@ public class OrderDAO {
             con = ConPool.getConnection();
             con.setAutoCommit(false);
 
-            // Prima elimina tutti gli OrderItem associati
+            // Prima recupera il prezzo dell'ordine da eliminare
+            PreparedStatement psGetPrice = con.prepareStatement("SELECT prezzo FROM orders WHERE id=?");
+            psGetPrice.setInt(1, orderId);
+            ResultSet rs = psGetPrice.executeQuery();
+
+            double prezzoOrdine = 0.0;
+            if (rs.next()) {
+                prezzoOrdine = rs.getDouble("prezzo");
+            } else {
+                // Se l'ordine non esiste, non fare nulla
+                con.rollback();
+                return;
+            }
+            rs.close();
+            psGetPrice.close();
+
+            // Elimina tutti gli OrderItem associati
             PreparedStatement ps1 = con.prepareStatement("DELETE FROM orderitem WHERE order_id=?");
             ps1.setInt(1, orderId);
             ps1.executeUpdate();
+            ps1.close();
 
-            // Poi elimina l'ordine
+            // Elimina l'ordine
             PreparedStatement ps2 = con.prepareStatement("DELETE FROM orders WHERE id=?");
             ps2.setInt(1, orderId);
             ps2.executeUpdate();
+            ps2.close();
+
+            // Aggiorna la tabella incassi sottraendo l'importo dell'ordine eliminato
+            PreparedStatement ps3 = con.prepareStatement("UPDATE incassi SET totale_incassato = totale_incassato - ? WHERE id = 1");
+            ps3.setDouble(1, prezzoOrdine);
+            ps3.executeUpdate();
+            ps3.close();
 
             con.commit();
         } catch (SQLException e) {
