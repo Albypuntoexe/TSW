@@ -43,7 +43,7 @@
         <form method="post" action="<%=request.getContextPath()%>/cart">
           <input type="hidden" name="action" value="add">
           <input type="hidden" name="codice" value="${prodotto.codice}">
-          <input type="number" name="quantita" value="1" min="1" style="width:60px;">
+          <input type="number" name="quantita" value="1" min="1">
           <button type="submit">Aggiungi al Carrello</button>
         </form>
       </div>

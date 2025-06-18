@@ -92,7 +92,7 @@
     <!-- Aggiungi dopo il div del totale -->
     <div>
       <% if (!ordine.isSpedito() && !ordine.isRicevuto()) { %>
-      <form action="<%=request.getContextPath()%>/user/orders" method="post" style="display:inline;">
+      <form action="<%=request.getContextPath()%>/user/orders" method="post">
         <input type="hidden" name="action" value="delete">
         <input type="hidden" name="orderId" value="<%=ordine.getId()%>">
         <button type="submit" onclick="return confirm('Sei sicuro di voler eliminare questo ordine?')">
@@ -100,7 +100,7 @@
         </button>
       </form>
       <% } else if (ordine.isSpedito() && !ordine.isRicevuto()) { %>
-      <form action="<%=request.getContextPath()%>/user/orders" method="post" style="display:inline;">
+      <form action="<%=request.getContextPath()%>/user/orders" method="post">
         <input type="hidden" name="action" value="receive">
         <input type="hidden" name="orderId" value="<%=ordine.getId()%>">
         <button type="submit">Conferma Ricezione</button>

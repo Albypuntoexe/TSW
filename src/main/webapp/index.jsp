@@ -42,7 +42,7 @@
     <div class="container">
         <div class="product-showcase">
             <div class="product-image">
-                <a href="<%=request.getContextPath()%>/show-prodotti">
+                <a href="#animali-container">
                     <img src="<%=request.getContextPath()%>/img/hero.png" alt="Kit Adozione Premium">
                 </a>
             </div>

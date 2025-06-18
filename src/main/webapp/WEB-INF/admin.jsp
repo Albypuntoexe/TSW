@@ -26,12 +26,12 @@
 
   <!-- Messaggi di successo/errore -->
   <c:if test="${param.success == '1'}">
-    <div style="color: green; margin: 10px 0;">
+    <div class="alert alert-success">
       <strong>Successo:</strong> Animale e prodotti aggiunti correttamente!
     </div>
   </c:if>
   <c:if test="${param.error != null && param.error != ''}">
-    <div style="color: red; margin: 10px 0;">
+    <div class="alert alert-danger">
       <strong>Errore:</strong> ${param.error}
     </div>
   </c:if>
@@ -128,13 +128,13 @@
         <td>
           <!-- Form per l'update -->
           <form id="updateForm_${specie.id}" action="doUpdateSpecie" method="post"
-                enctype="multipart/form-data" style="display:inline;">
+                enctype="multipart/form-data" class="form-inline">
             <input type="hidden" name="id" value="${specie.id}">
             <button type="submit">Aggiorna</button>
           </form>
 
           <!-- Form per la delete -->
-          <form action="deleteSpecie" method="post" style="display:inline;">
+          <form action="deleteSpecie" method="post" class="form-inline">
             <input type="hidden" name="id" value="${specie.id}">
             <button type="submit" onclick="return confirm('Sei sicuro di voler eliminare questa specie?')">
               Elimina
@@ -325,7 +325,7 @@
           </td>
           <td>
             <c:if test="${!order.spedito && !order.ricevuto}">
-              <form action="${pageContext.request.contextPath}/admin/orders" method="post" style="display:inline;">
+              <form action="${pageContext.request.contextPath}/admin/orders" method="post" class="form-inline">
                 <input type="hidden" name="action" value="ship">
                 <input type="hidden" name="orderId" value="${order.id}">
                 <button type="submit">Spedisci</button>

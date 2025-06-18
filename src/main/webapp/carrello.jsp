@@ -65,13 +65,13 @@
                     <h3><%=item.getProdotto().getNome()%></h3>
                     <p>Prezzo: €<%=String.format("%.2f", item.getProdotto().getPrezzo())%></p>
                     <div class="quantity-controls">
-                        <form method="post" action="<%=request.getContextPath()%>/cart" style="display:inline;">
+                        <form method="post" action="<%=request.getContextPath()%>/cart">
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="codice" value="<%=item.getProdotto().getCodice()%>">
-                            <input type="number" name="quantita" value="<%=item.getQuantita()%>" min="1" style="width:60px;">
+                            <input type="number" name="quantita" value="<%=item.getQuantita()%>" min="1">
                             <button type="submit">Aggiorna</button>
                         </form>
-                        <form method="post" action="<%=request.getContextPath()%>/cart" style="display:inline;">
+                        <form method="post" action="<%=request.getContextPath()%>/cart">
                             <input type="hidden" name="action" value="remove">
                             <input type="hidden" name="codice" value="<%=item.getProdotto().getCodice()%>">
                             <button type="submit" class="remove-btn">Rimuovi</button>
@@ -100,7 +100,7 @@
             <p>Devi <a href="<%=request.getContextPath()%>/login">accedere</a> per completare l'ordine</p>
             <% } %>
 
-            <form method="post" action="<%=request.getContextPath()%>/cart" style="margin-top:10px;">
+            <form method="post" action="<%=request.getContextPath()%>/cart">
                 <input type="hidden" name="action" value="clear">
                 <button type="submit" class="clear-btn">Svuota Carrello</button>
             </form>

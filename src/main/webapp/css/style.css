@@ -1,15 +1,28 @@
-/* Reset e base */
+/* ============================================= */
+/* ===== RESET, GLOBALI E ANIMAZIONI FLUIDE ===== */
+/* ============================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Aggiunge lo scorrimento fluido a tutte le ancore della pagina */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #4a4a4a;
+    background-color: #fdfdfd; /* Sfondo leggermente più morbido del bianco puro */
 }
+
+/* ===================================== */
+/* ===== COMPONENTI RIUTILIZZABILI ===== */
+/* ===================================== */
 
 .container {
     max-width: 1200px;
@@ -17,7 +30,74 @@ body {
     padding: 0 20px;
 }
 
-/* Navbar sticky */
+/* Sistema di pulsanti refattorizzato */
+.btn {
+    display: inline-block;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-primary {
+    background: #d4b896;
+    padding: 15px; /* Padding specifico per bottoni primari grandi */
+    width: 100%;
+}
+.btn-primary:hover {
+    background: #c4a886;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #a8c5a0;
+}
+.btn-secondary:hover {
+    background: #97b48f;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: #dc3545;
+}
+.btn-danger:hover {
+    background: #c82333;
+}
+
+/* Stili per i messaggi di avviso */
+.alert {
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 5px;
+    font-weight: bold;
+    max-width: 800px;
+    border: 1px solid transparent;
+}
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* Utility Class */
+.text-center {
+    text-align: center;
+}
+
+/* ======================================== */
+/* ===== NAVBAR (stickynavbar.jsp) ===== */
+/* ======================================== */
+
 .sticky-navbar {
     position: fixed;
     top: 0;
@@ -33,24 +113,7 @@ body {
 
 .logo img {
     height: 40px;
-}
-
-.nav-menu {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.nav-menu a:hover {
-    background: rgba(255,255,255,0.2);
+    vertical-align: middle; /* Allinea meglio l'immagine */
 }
 
 .nav-right {
@@ -73,7 +136,7 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 24px; /* Leggermente più grande per essere più cliccabile */
     cursor: pointer;
     padding: 5px;
 }
@@ -83,7 +146,7 @@ body {
     position: absolute;
     right: 0;
     background: white;
-    min-width: 160px;
+    min-width: 200px; /* Più largo */
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     border-radius: 5px;
     overflow: hidden;
@@ -101,10 +164,13 @@ body {
     color: white;
 }
 
-/* Header */
+/* ======================================== */
+/* ===== HEADER & HERO (home.jsp) ===== */
+/* ======================================== */
+
 .header-background {
     background: url('../img/header1.png') no-repeat center center / cover;
-    padding: 120px 20px 60px;
+    padding: 140px 20px 60px; /* Più padding sopra per la navbar */
     text-align: center;
     color: white;
 }
@@ -112,7 +178,7 @@ body {
 .hero-title {
     font-size: 3rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Ombra più marcata */
 }
 
 .hero-subtitle {
@@ -141,178 +207,11 @@ body {
     font-size: 0.9rem;
 }
 
-/* Sezione prodotto in evidenza */
-.featured-product {
-    padding: 60px 0;
-    background: #f8f8f8;
-}
 
-.product-showcase {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
+/* ================================= */
+/* ===== FOOTER (footer.jsp) ===== */
+/* ================================= */
 
-.product-image {
-    flex: 1;
-}
-
-.product-image img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.product-image img:hover {
-    transform: scale(1.05);
-}
-
-.product-info {
-    flex: 1;
-}
-
-.product-info h2 {
-    font-size: 2rem;
-    color: #a8c5a0;
-    margin-bottom: 20px;
-}
-
-.product-info p {
-    margin-bottom: 30px;
-    line-height: 1.8;
-}
-
-.cta-button {
-    background: #d4b896;
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    display: inline-block;
-    transition: background 0.3s;
-}
-
-.cta-button:hover {
-    background: #c4a886;
-}
-
-/* Main content */
-.main-content {
-    padding: 40px 0;
-}
-
-/* Animali cards */
-.animali-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    padding: 40px 20px;
-}
-
-.animale-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.animale-card:hover {
-    transform: translateY(-5px);
-}
-
-.animale-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.animale-card h3 {
-    padding: 15px;
-    color: #a8c5a0;
-}
-
-.animale-card button {
-    background: #d4b896;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.animale-card button:hover {
-    background: #c4a886;
-}
-
-/* Sezioni generali */
-.impact-section, .how-it-works, .faq-section {
-    padding: 60px 0;
-    text-align: center;
-}
-
-.impact-section {
-    background: #a8c5a0;
-    color: white;
-}
-
-.impact-section h2, .how-it-works h2, .faq-section h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.impact-grid, .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.impact-item, .step-item {
-    padding: 20px;
-}
-
-.impact-icon, .step-number {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.step-number {
-    background: #d4b896;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-/* FAQ */
-.faq-item {
-    background: white;
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: left;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.faq-item h3 {
-    color: #a8c5a0;
-    margin-bottom: 10px;
-}
-
-/* Footer */
 .footer {
     background: #4a4a4a;
     color: white;
@@ -323,6 +222,9 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .footer-section h3 {
@@ -354,41 +256,163 @@ body {
     border-top: 1px solid #666;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none;
-    }
 
-    .hero-title {
-        font-size: 2rem;
-    }
+/* ======================================================== */
+/* ===== CONTENUTI PRINCIPALI (PAGINA-SPECIFICI) ===== */
+/* ======================================================== */
 
-    .product-showcase {
-        flex-direction: column;
-    }
-
-    .hero-stats {
-        gap: 20px;
-    }
+/* Aggiunge padding per non far coprire i contenuti dalla navbar fissa */
+.main-content {
+    padding-top: 80px;
+    padding-bottom: 40px;
 }
 
-/* ========== NUOVI STILI PER LE PAGINE JSP ========== */
+/* --- HOME (home.jsp) --- */
+.featured-product {
+    padding: 60px 0;
+    background: #f8f8f8;
+}
 
-/* Pagina Prodotto - Dettagli Animale */
+.product-showcase {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.product-image { flex: 1; }
+.product-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.product-image img:hover {
+    transform: scale(1.05);
+}
+
+.product-info { flex: 1; }
+.product-info h2 {
+    font-size: 2rem;
+    color: #a8c5a0;
+    margin-bottom: 20px;
+}
+.product-info p {
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+.product-info .cta-button { /* Selettore più specifico */
+    background: #d4b896;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background 0.3s;
+}
+.product-info .cta-button:hover {
+    background: #c4a886;
+}
+
+.animali-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+}
+
+.animale-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.animale-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+.animale-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.animale-card h3 {
+    padding: 15px;
+    color: #a8c5a0;
+}
+.animale-card button {
+    background: #d4b896;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+.animale-card button:hover {
+    background: #c4a886;
+}
+
+.impact-section, .how-it-works, .faq-section {
+    padding: 60px 0;
+    text-align: center;
+}
+.impact-section { background: #a8c5a0; color: white; }
+.impact-section h2, .how-it-works h2, .faq-section h2 { font-size: 2rem; margin-bottom: 20px; }
+.impact-grid, .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+.impact-item, .step-item { padding: 20px; }
+.impact-icon, .step-number { font-size: 2rem; margin-bottom: 15px; }
+.step-number {
+    background: #d4b896;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.faq-item {
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+.faq-item h3 {
+    color: #a8c5a0;
+    margin-bottom: 10px;
+}
+
+
+/* --- PAGINA PRODOTTO (prodotto.jsp) --- */
 .animale-dettagli {
-    padding: 80px 20px 40px;
+    padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
-
 .animale-dettagli h1 {
     font-size: 2.5rem;
     color: #a8c5a0;
     margin-bottom: 20px;
 }
-
 .animale-dettagli p {
     font-size: 1.1rem;
     margin-bottom: 30px;
@@ -396,7 +420,6 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
-
 .animale-dettagli .animale-img {
     width: 100%;
     max-width: 500px;
@@ -404,15 +427,14 @@ body {
     object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 0 auto;
 }
 
-/* Kit Prodotti - Layout alternato */
 .prodotti-container {
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
-
 .prodotti-container h2 {
     font-size: 2rem;
     color: #a8c5a0;
@@ -430,37 +452,36 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-
-.prodotto-img {
+.prodotto-card .prodotto-img {
     width: 300px;
     height: 250px;
     object-fit: cover;
     border-radius: 10px;
     flex-shrink: 0;
 }
-
-.prodotto-info {
-    flex: 1;
-}
-
+.prodotto-card .kit-product-info { flex: 1; } /* Rinominato per chiarezza */
 .prodotto-card h3 {
     font-size: 1.8rem;
     color: #a8c5a0;
     margin-bottom: 15px;
 }
-
 .prodotto-card p {
     margin-bottom: 10px;
     line-height: 1.6;
 }
-
 .prodotto-card form {
     margin-top: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
+.prodotto-card input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 .prodotto-card button {
     background: #d4b896;
     color: white;
@@ -471,40 +492,34 @@ body {
     font-weight: bold;
     transition: background 0.3s;
 }
-
 .prodotto-card button:hover {
     background: #c4a886;
 }
 
-/* Login/Register Page */
+/* --- LOGIN/REGISTER (login.jsp) --- */
 .form-container {
-    max-width: 400px;
-    margin: 100px auto 40px;
+    max-width: 450px;
+    margin: 40px auto;
     padding: 40px;
     background: white;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-
-.form-container.active {
-    display: block;
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #a8c5a0;
 }
+.form-container.active { display: block; }
+.form-container:not(.active) { display: none; }
 
-.form-container:not(.active) {
-    display: none;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
+.form-group { margin-bottom: 20px; }
 .form-group label {
     display: block;
     margin-bottom: 5px;
     color: #4a4a4a;
     font-weight: bold;
 }
-
 .form-control {
     width: 100%;
     padding: 12px;
@@ -513,7 +528,6 @@ body {
     font-size: 14px;
     transition: border-color 0.3s;
 }
-
 .form-control:focus {
     outline: none;
     border-color: #a8c5a0;
@@ -526,93 +540,44 @@ body {
     margin-bottom: 20px;
 }
 
-.btn-primary {
-    width: 100%;
-    padding: 15px;
-    background: #d4b896;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
 
-.btn-primary:hover {
-    background: #c4a886;
-}
-
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.alert-success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Carrello */
+/* --- CARRELLO (carrello.jsp) --- */
 .cart-container {
     max-width: 1200px;
-    margin: 80px auto 40px;
+    margin: 0 auto;
     padding: 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
 }
-
 .cart-items {
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-
 .cart-item {
     display: flex;
     gap: 20px;
     padding: 20px 0;
     border-bottom: 1px solid #eee;
 }
-
-.cart-item:last-child {
-    border-bottom: none;
-}
-
-.item-img {
+.cart-item:last-child { border-bottom: none; }
+.cart-item .item-img {
     width: 100px;
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
 }
-
-.item-details {
-    flex: 1;
-}
-
-.item-details h3 {
-    color: #a8c5a0;
-    margin-bottom: 10px;
-}
-
+.item-details { flex: 1; }
+.item-details h3 { color: #a8c5a0; margin-bottom: 10px; }
 .quantity-controls {
     display: flex;
     gap: 10px;
     align-items: center;
     margin: 10px 0;
 }
-
+.quantity-controls input { width: 60px; text-align: center; }
 .quantity-controls button {
     background: #d4b896;
     color: white;
@@ -621,15 +586,8 @@ body {
     border-radius: 3px;
     cursor: pointer;
 }
-
-.remove-btn {
-    background: #dc3545 !important;
-}
-
-.subtotal {
-    font-weight: bold;
-    color: #a8c5a0;
-}
+.remove-btn { background: #dc3545 !important; }
+.subtotal { font-weight: bold; color: #a8c5a0; }
 
 .cart-summary {
     background: white;
@@ -638,19 +596,13 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     height: fit-content;
 }
-
-.cart-summary h2 {
-    color: #a8c5a0;
-    margin-bottom: 20px;
-}
-
+.cart-summary h2 { color: #a8c5a0; margin-bottom: 20px; }
 .total {
     font-size: 1.5rem;
     font-weight: bold;
     color: #d4b896;
     margin-bottom: 30px;
 }
-
 .cart-summary input {
     width: 100%;
     padding: 10px;
@@ -658,7 +610,6 @@ body {
     border: 2px solid #ddd;
     border-radius: 5px;
 }
-
 .checkout-btn {
     width: 100%;
     padding: 15px;
@@ -670,7 +621,6 @@ body {
     cursor: pointer;
     margin-bottom: 10px;
 }
-
 .clear-btn {
     width: 100%;
     padding: 10px;
@@ -680,24 +630,16 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+.empty-cart { text-align: center; padding: 80px 20px; }
+.empty-cart h2 { color: #a8c5a0; margin-bottom: 20px; }
 
-.empty-cart {
-    text-align: center;
-    padding: 80px 20px;
-}
 
-.empty-cart h2 {
-    color: #a8c5a0;
-    margin-bottom: 20px;
-}
-
-/* Ordini Utente */
+/* --- ORDINI UTENTE (ordini.jsp) --- */
 .orders-container {
     max-width: 1200px;
-    margin: 80px auto 40px;
+    margin: 0 auto;
     padding: 20px;
 }
-
 .order-card {
     background: white;
     margin-bottom: 30px;
@@ -705,7 +647,6 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
-
 .order-header {
     display: flex;
     justify-content: space-between;
@@ -714,50 +655,21 @@ body {
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
+.order-header h3 { color: #a8c5a0; }
+.status-received { color: #28a745; font-weight: bold; }
+.status-shipped { color: #ffc107; font-weight: bold; }
+.status-processing { color: #6c757d; font-weight: bold; }
 
-.order-header h3 {
-    color: #a8c5a0;
-}
-
-.status-received {
-    color: #28a745;
-    font-weight: bold;
-}
-
-.status-shipped {
-    color: #ffc107;
-    font-weight: bold;
-}
-
-.status-processing {
-    color: #6c757d;
-    font-weight: bold;
-}
-
-.order-items {
-    margin: 20px 0;
-}
-
+.order-items { margin: 20px 0; }
 .order-item {
     display: flex;
     gap: 20px;
     padding: 15px 0;
     border-bottom: 1px solid #f8f9fa;
 }
-
-.order-item:last-child {
-    border-bottom: none;
-}
-
-.order-item .item-img {
-    width: 80px;
-    height: 60px;
-}
-
-.item-info h4 {
-    color: #a8c5a0;
-    margin-bottom: 5px;
-}
+.order-item:last-child { border-bottom: none; }
+.order-item .item-img { width: 80px; height: 60px; }
+.order-item .item-info h4 { color: #a8c5a0; margin-bottom: 5px; }
 
 .order-shipping {
     background: #f8f9fa;
@@ -765,41 +677,51 @@ body {
     border-radius: 8px;
     margin: 20px 0;
 }
+.order-shipping h4 { color: #4a4a4a; margin-bottom: 10px; }
+.order-total { text-align: right; }
+.order-total h3 { color: #d4b896; font-size: 1.5rem; }
 
-.order-shipping h4 {
+.no-orders { text-align: center; padding: 80px 20px; }
+.no-orders h2 { color: #a8c5a0; margin-bottom: 20px; }
+
+
+/* --- PAGINE STATICHE (termini.jsp, spedizioni.jsp, contatti.jsp) --- */
+.info-section {
+    background: #f8f8f8;
     color: #4a4a4a;
+    padding: 20px 0;
+}
+.contatti-container {
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+.contatti-container h1, .contatti-container h2 { color: #a8c5a0; margin-bottom: 15px;}
+.contatti-container p { margin-bottom: 10px; }
+
+
+/* --- PANNELLO ADMIN (admin.jsp) --- */
+.admin-panel {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.admin-panel header h1 { color: #a8c5a0; text-align: center; margin-bottom: 20px; }
+.admin-panel form legend { font-size: 1.5rem; color: #a8c5a0; margin-top: 20px; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+.admin-panel fieldset { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+.admin-panel label { display: block; margin-bottom: 5px; font-weight: bold; }
+.admin-panel input[type="text"],
+.admin-panel input[type="number"],
+.admin-panel input[type="file"],
+.admin-panel textarea {
+    width: 100%;
+    padding: 10px;
     margin-bottom: 10px;
-}
-
-.order-total {
-    text-align: right;
-}
-
-.order-total h3 {
-    color: #d4b896;
-    font-size: 1.5rem;
-}
-
-.no-orders {
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.no-orders h2 {
-    color: #a8c5a0;
-    margin-bottom: 20px;
-}
-
-.success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 15px;
     border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: center;
+    border: 1px solid #ccc;
 }
+.form-inline { display: inline; }
 
-/* Admin Panel */
 .admin-table {
     width: 100%;
     margin: 20px 0;
@@ -808,25 +730,20 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
 }
-
-.admin-table th,
-.admin-table td {
-    padding: 15px;
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #eee;
+    vertical-align: middle;
 }
-
 .admin-table th {
     background: #a8c5a0;
     color: white;
     font-weight: bold;
 }
-
-.admin-table tr:hover {
-    background: #f8f9fa;
-}
-
+.admin-table tr:hover { background: #f8f9fa; }
 .admin-table button {
     background: #d4b896;
     color: white;
@@ -835,37 +752,25 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-right: 5px;
+    margin-top: 5px; /* Spazio per i bottoni */
+}
+.admin-table button:hover { background: #c4a886; }
+.admin-table img {
+    height: 50px;
+    border-radius: 5px;
 }
 
-.admin-table button:hover {
-    background: #c4a886;
-}
 
-/* Responsive per nuove pagine */
+/* =================================== */
+/* ===== STILI RESPONSIVE ===== */
+/* =================================== */
 @media (max-width: 768px) {
-    .prodotto-card,
-    .prodotto-card:nth-child(even) {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .prodotto-img {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .cart-container {
-        grid-template-columns: 1fr;
-    }
-
-    .order-header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-
-    .cart-item {
-        flex-direction: column;
-        text-align: center;
-    }
+    .nav-menu { display: none; }
+    .hero-title { font-size: 2rem; }
+    .product-showcase { flex-direction: column; }
+    .hero-stats { gap: 20px; }
+    .prodotto-card { flex-direction: column; text-align: center; }
+    .cart-container { grid-template-columns: 1fr; }
+    .order-header { flex-direction: column; gap: 10px; text-align: center; }
+    .cart-item { flex-direction: column; text-align: center; }
 }

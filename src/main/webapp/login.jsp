@@ -67,7 +67,7 @@
   <!-- Form di Login -->
   <div class="form-container active" id="loginForm">
     <form action="<%=request.getContextPath()%>/login" method="post">
-      <h2 style="text-align: center; margin-bottom: 2rem;">ACCEDI AL TUO ACCOUNT</h2>
+      <h2>ACCEDI AL TUO ACCOUNT</h2>
 
       <div class="form-group">
         <label for="username">Username</label>
@@ -92,7 +92,7 @@
   <!-- Form di Registrazione -->
   <div class="form-container" id="registerForm">
     <form action="<%=request.getContextPath()%>/register" method="post">
-      <h2 style="text-align: center; margin-bottom: 2rem;">CREA UN NUOVO ACCOUNT</h2>
+      <h2>CREA UN NUOVO ACCOUNT</h2>
 
       <div class="form-group">
         <label for="reg_username">Username</label>
