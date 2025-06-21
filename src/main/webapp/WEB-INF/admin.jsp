@@ -14,10 +14,6 @@
 
 <header>
   <h1>Pannello Amministratore</h1>
-  <nav>
-    <a href="/">Home</a>
-    <a href="logout">Logout</a>
-  </nav>
   <p>Benvenuto, ${sessionScope.user.nome}!</p>
 </header>
 
@@ -149,8 +145,12 @@
   <h2>Gestione Prodotti delle Specie</h2>
   <p>Qui puoi modificare i prodotti Standard e Premium associati a ogni specie animale.</p>
 
-  <!-- Recupero dei prodotti direttamente nella JSP -->
+  <!-- Recupero dei prodotti e incassi direttamente nella JSP -->
   <jsp:useBean id="prodottoDAO" class="model.dao.ProdottoDAO" scope="page" />
+  <jsp:useBean id="incassiDAO" class="model.dao.IncassiDAO" scope="page" />
+  <!-- Recupera il totale incassi -->
+  <c:set var="totaleIncassi" value="${incassiDAO.getTotaleIncassi()}" />
+
 
   <c:forEach items="${specieAnimali}" var="specie">
     <h3>Prodotti per: ${specie.nome}</h3>
@@ -341,7 +341,20 @@
     <p>Nessun ordine presente nel sistema.</p>
   </c:if>
   <!-- FINE NUOVA SEZIONE GESTIONE ORDINI -->
-
+  <!-- NUOVA SEZIONE TOTALE INCASSI -->
+  <h2>Totale Incassi</h2>
+  <div class="incassi-section">
+    <div class="incassi-content">
+      <h3>💰 Totale Incassato</h3>
+      <div class="incassi-total">
+        €<span id="totaleIncassi">${totaleIncassi}</span>
+      </div>
+      <p class="incassi-text">
+        Importo totale degli ordini ricevuti
+      </p>
+    </div>
+  </div>
+  <!-- FINE NUOVA SEZIONE TOTALE INCASSI -->
   <hr>
 
   <h3>Informazioni</h3>

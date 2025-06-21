@@ -99,7 +99,7 @@ body {
 /* ======================================== */
 
 .sticky-navbar {
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     background: #d4b896;
@@ -263,7 +263,7 @@ body {
 
 /* Aggiunge padding per non far coprire i contenuti dalla navbar fissa */
 .main-content {
-    padding-top: 80px;
+    padding-top: 100px;
     padding-bottom: 40px;
 }
 
@@ -759,12 +759,37 @@ body {
     height: 50px;
     border-radius: 5px;
 }
+.incassi-section {
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.incassi-content {
+    text-align: center;
+}
+
+.incassi-content h3 {
+    margin-bottom: 10px;
+}
+
+.incassi-total {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.incassi-text {
+    margin-top: 10px;
+}
 
 
 /* =================================== */
 /* ===== STILI RESPONSIVE ===== */
 /* =================================== */
 @media (max-width: 768px) {
+    .main-content {
+        margin-top: 60px; /* Riduci leggermente se la navbar è più compatta su mobile */
+    }
     .nav-menu { display: none; }
     .hero-title { font-size: 2rem; }
     .product-showcase { flex-direction: column; }

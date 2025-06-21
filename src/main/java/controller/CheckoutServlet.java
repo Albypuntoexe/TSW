@@ -9,9 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import model.beans.*;
 import model.dao.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import model.dao.IncassiDAO;
 import java.util.Map;
 
 @WebServlet("/checkout")
@@ -61,23 +59,12 @@ public class CheckoutServlet extends HttpServlet {
         orderDAO.doSave(ordine);
 
         // Aggiorna incassi
-        aggiornaIncassi(totale);
+        IncassiDAO incassiDAO = new IncassiDAO();
+        incassiDAO.aggiornaIncassi(totale);
 
         // Svuota il carrello
         carrello.clear();
 
         response.sendRedirect(request.getContextPath() + "/ordini.jsp?success=order_placed");
-    }
-
-    private void aggiornaIncassi(double importo) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
-                    "UPDATE incassi SET totale_incassato = totale_incassato + ? WHERE id = 1"
-            );
-            ps.setDouble(1, importo);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
