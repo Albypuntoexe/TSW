@@ -6,7 +6,7 @@
     boolean isLoggedIn = (user != null);
     boolean isAdmin = (isLoggedIn && user.isAdmin());
 %>
-
+<link rel="icon" href="<%=request.getContextPath()%>/img/logo.png" type="image/x-icon">
 <!-- Navbar sticky con logo, menu e carrello -->
 <nav class="sticky-navbar">
     <span class="logo">
@@ -27,7 +27,6 @@
             <span class="dropdown-content">
                 <% if (isLoggedIn) { %>
                 <!-- Menu per utenti loggati -->
-                    <a href="<%=request.getContextPath()%>/area-personale.jsp">Area Personale</a>
                     <a href="<%=request.getContextPath()%>/ordini.jsp">I miei Ordini</a>
                     <a href="<%=request.getContextPath()%>/contatti.jsp">Contatti</a>
                     <% if (isAdmin) { %>
@@ -38,6 +37,7 @@
                 <!-- Menu per utenti non loggati -->
                     <a href="<%=request.getContextPath()%>/login">Accedi/Registrati</a>
                     <a href="<%=request.getContextPath()%>/contatti.jsp">Contatti</a>
+                    <a href="<%=request.getContextPath()%>/termini.jsp">Termini e Condizioni</a>
                 <% } %>
             </span>
         </span>

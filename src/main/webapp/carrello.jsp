@@ -91,8 +91,13 @@
             <form method="post" action="<%=request.getContextPath()%>/checkout">
                 <h3>Indirizzo di Spedizione</h3>
                 <input type="text" name="via" placeholder="Via e numero" required>
-                <input type="text" name="citta" placeholder="Città" required>
-                <input type="text" name="provincia" placeholder="Provincia" required>
+
+                <input type="text" id="provincia" name="provincia" placeholder="Provincia" list="province-list" required>
+                <datalist id="province-list"></datalist>
+
+                <input type="text" id="citta" name="citta" placeholder="Città" list="citta-list" required>
+                <datalist id="citta-list"></datalist>
+
                 <input type="number" name="cap" placeholder="CAP" required>
                 <button type="submit" class="checkout-btn">Ordina e Paga</button>
             </form>
@@ -110,5 +115,53 @@
 </main>
 
 <jsp:include page="footer.jsp" />
+
+<script>
+    let comuniData = null;
+
+    // Carica i dati dei comuni con XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '<%=request.getContextPath()%>/comuni.json', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            comuniData = JSON.parse(xhr.responseText);
+
+            // Popola datalist delle province
+            const provinceList = document.getElementById('province-list');
+            const provinceSet = new Set();
+            comuniData.forEach(comune => {
+                provinceSet.add(comune.provincia.nome);
+            });
+            provinceSet.forEach(provincia => {
+                const option = document.createElement('option');
+                option.value = provincia;
+                provinceList.appendChild(option);
+            });
+        }
+    };
+    xhr.send();
+
+    // Quando cambia la provincia, aggiorna le città
+    document.getElementById('provincia').addEventListener('input', function() {
+        const provincia = this.value;
+        const cittaList = document.getElementById('citta-list');
+
+        // Svuota lista città
+        cittaList.innerHTML = '';
+
+        if (comuniData) {
+            comuniData.filter(comune => comune.provincia.nome === provincia)
+                .forEach(comune => {
+                    const option = document.createElement('option');
+                    option.value = comune.nome;
+                    cittaList.appendChild(option);
+                });
+        }
+
+        // Reset campo città
+        document.getElementById('citta').value = '';
+    });
+</script>
+
 </body>
 </html>

@@ -39,7 +39,6 @@
   if("success".equals(request.getParameter("login"))) {
 %><div class="alert alert-success">Login effettuato con successo!</div>
   <% } %>
-<!-- todo aggiustare il fatto che viene coperto da navbar ^^^^^^^^^^^^^^^^-->
 
 <!DOCTYPE html>
 <html lang="it">
@@ -47,10 +46,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
-  <link rel="icon" href="<%=request.getContextPath()%>/img/favicon.ico" type="image/x-icon">
   <title>Accedi | Adopta</title>
 <body>
 <jsp:include page="stickynavbar.jsp" />
+<div class="form-switcher container text-center" style="margin: 40px auto;">
+  <button id="loginSwitch"    class="btn btn-secondary active">Accedi</button>
+  <button id="registerSwitch" class="btn btn-secondary">Registrati</button>
+</div>
+
   <!-- Messaggi di errore/successo -->
   <% if (!errorMessage.isEmpty()) { %>
   <div class="alert alert-danger">
