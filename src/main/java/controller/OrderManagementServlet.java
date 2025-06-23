@@ -25,12 +25,14 @@ public class OrderManagementServlet extends HttpServlet {
             return;
         }
 
+        // se non è admin, reindirizza alla home con errore
         User currentUser = (User) session.getAttribute("user");
         if (!currentUser.isAdmin()) {
             response.sendRedirect(request.getContextPath() + "/index.jsp?error=access_denied");
             return;
         }
 
+        // recupera l'azione da svolgere e su quale ordine
         String action = request.getParameter("action");
         String orderIdParam = request.getParameter("orderId");
 
@@ -44,6 +46,7 @@ public class OrderManagementServlet extends HttpServlet {
             int orderId = Integer.parseInt(orderIdParam);
             OrderDAO orderDAO = new OrderDAO();
 
+            // se l'azione è spedisci
             if ("ship".equals(action)) {
                 orderDAO.doUpdateShippingStatus(orderId, true);
                 request.setAttribute("success", "order_shipped");

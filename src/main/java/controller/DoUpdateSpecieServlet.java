@@ -24,14 +24,17 @@ public class DoUpdateSpecieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // getta gli attributi dalla richiesta
         int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome_" + id);
         String descrizione = request.getParameter("descrizione_" + id);
         Part nuovaImmagine = request.getPart("nuovaImmagine_" + id);
 
+        // crea un istanza per poi modificare la specie con lo specifico id
         SpecieAnimaleDAO specieDAO = new SpecieAnimaleDAO();
         SpecieAnimale specie = specieDAO.doRetrieveById(id);
 
+        //setta i nuovi valori
         specie.setNome(nome);
         specie.setDescrizione(descrizione);
 
@@ -48,6 +51,7 @@ public class DoUpdateSpecieServlet extends HttpServlet {
             specie.setUrlImage("img/animali/" + fileName);
         }
 
+        // Aggiorna la specie nel database
         specieDAO.doUpdate(specie);
 
         // Aggiorna il contesto

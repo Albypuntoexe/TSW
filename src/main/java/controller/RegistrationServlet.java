@@ -26,6 +26,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // recupera i parametri dal form della richiesta
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -33,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
         String cognome = request.getParameter("cognome");
         String telefono = request.getParameter("telefono");
 
-        // Validazione dei campi obbligatori
+        // Validazione dei campi obbligatori, in caso di campi vuoti reindirizza alla pagina di login con un errore
         if (username == null || password == null || email == null || nome == null ||
                 username.trim().isEmpty() || password.trim().isEmpty() ||
                 email.trim().isEmpty() || nome.trim().isEmpty()) {
@@ -41,7 +42,7 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        // Creazione dell'oggetto User
+        // Creazione di un nuovo oggetto User con i dati forniti
         User user = new User();
         user.setUsername(username.trim());
         user.setNome(nome.trim());

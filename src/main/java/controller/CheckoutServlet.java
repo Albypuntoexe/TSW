@@ -21,12 +21,12 @@ public class CheckoutServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-
+        // l'utente è loggato?
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-
+        // il carrello è vuoto?
         Map<Integer, CartItem> carrello = (Map<Integer, CartItem>) session.getAttribute("carrello");
         if (carrello == null || carrello.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/carrello.jsp?error=empty");

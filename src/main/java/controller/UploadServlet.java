@@ -113,6 +113,7 @@ public class UploadServlet extends HttpServlet {
             // Aggiorna il ServletContext con le nuove specie
             refreshSpecieAnimaliContext();
 
+            // Imposta un attributo di successo e inoltra alla pagina admin
             request.setAttribute("success", "upload");
             request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 

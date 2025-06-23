@@ -14,36 +14,19 @@
 
 <main class="main-content">
     <h1>Il tuo Carrello</h1>
-
     <%
-        // Gestione aggiunta prodotto da URL
-        String codiceParam = request.getParameter("codice");
-        if (codiceParam != null) {
-            try {
-                int codice = Integer.parseInt(codiceParam);
-                model.dao.ProdottoDAO dao = new model.dao.ProdottoDAO();
-                model.beans.Prodotto prodotto = dao.doRetrieveByCodice(codice);
-
-                if (prodotto != null) {
-                    Map<Integer, CartItem> carrello = (Map<Integer, CartItem>) session.getAttribute("carrello");
-                    if (carrello == null) {
-                        carrello = new java.util.HashMap<>();
-                        session.setAttribute("carrello", carrello);
-                    }
-
-                    if (carrello.containsKey(codice)) {
-                        carrello.get(codice).setQuantita(carrello.get(codice).getQuantita() + 1);
-                    } else {
-                        carrello.put(codice, new CartItem(prodotto, 1));
-                    }
-                }
-            } catch (NumberFormatException e) {}
+        // Ottieni il carrello dalla sessione. Se non esiste, crea una nuova mappa vuota.
+        Map<Integer, CartItem> carrello = (Map<Integer, CartItem>) session.getAttribute("carrello");
+        if (carrello == null) {
+            carrello = new java.util.HashMap<>();
+            session.setAttribute("carrello", carrello); // Assicurati che un carrello vuoto sia sempre in sessione
         }
 
-        Map<Integer, CartItem> carrello = (Map<Integer, CartItem>) session.getAttribute("carrello");
+        // Inizializza la variabile 'totale'
         double totale = 0;
 
-        if (carrello == null || carrello.isEmpty()) {
+        // Il blocco di codice qui sotto gestirà la visualizzazione
+        if (carrello.isEmpty()) { // Usiamo .isEmpty() ora che carrello è sempre un oggetto
     %>
     <div class="empty-cart">
         <h2>Il tuo carrello è vuoto</h2>
@@ -87,7 +70,8 @@
             <h2>Riepilogo Ordine</h2>
             <p class="total">Totale: €<%=String.format("%.2f", totale)%></p>
 
-            <% if (session.getAttribute("user") != null) { %>
+            <% // Controlla se l'utente è loggato per mostrare il form di checkout
+                if (session.getAttribute("user") != null) { %>
             <form method="post" action="<%=request.getContextPath()%>/checkout">
                 <h3>Indirizzo di Spedizione</h3>
                 <input type="text" name="via" placeholder="Via e numero" required>
@@ -119,15 +103,19 @@
 <script>
     let comuniData = null;
 
-    // Carica i dati dei comuni con XMLHttpRequest
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', '<%=request.getContextPath()%>/comuni.json', true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            comuniData = JSON.parse(xhr.responseText);
+    // Carica i dati dei comuni con XMLHttpRequest a pagina caricata
+    const xhttp = new XMLHttpRequest();
+    // metodo, url e asincrono
+    xhttp.open('GET', '<%=request.getContextPath()%>/comuni.json', true);
+    // funzione asincrona e non bloccante che richiamata a ogni cambio di readystate
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            // popola la variabile comuniData con i dati JSON ricevuti facendo il parse a un oggetto JavaScript
+            comuniData = JSON.parse(xhttp.responseText);
 
-            // Popola datalist delle province
+            // Popola datalist delle province con riferimento all'html
             const provinceList = document.getElementById('province-list');
+            // Crea un set per evitare duplicati e popola il datalist
             const provinceSet = new Set();
             comuniData.forEach(comune => {
                 provinceSet.add(comune.provincia.nome);
@@ -139,7 +127,7 @@
             });
         }
     };
-    xhr.send();
+    xhttp.send();
 
     // Quando cambia la provincia, aggiorna le città
     document.getElementById('provincia').addEventListener('input', function() {

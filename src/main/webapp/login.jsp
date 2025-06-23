@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   // Gestione dei cookie per "ricordami"
+  // legge i cookie che il browser ha inviato al server come parte della richiesta HTTP
   Cookie[] cookies = request.getCookies();
   String savedUsername = "";
 

@@ -46,11 +46,13 @@
 
 <script>
     document.querySelector('.dropbtn').addEventListener('click', function () {
+        // quando il pulsante viene cliccato
         const dropdown = document.querySelector('.dropdown-content');
+        // alterna la visibilità del menu a tendina
         dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Chiudi il dropdown quando si clicca fuori
+    // Chiudi il dropdown quando si clicca fuori (evento globale)
     document.addEventListener('click', function(event) {
         if (!event.target.matches('.dropbtn')) {
             const dropdown = document.querySelector('.dropdown-content');

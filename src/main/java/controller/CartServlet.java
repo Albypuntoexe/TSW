@@ -25,16 +25,19 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // recupera l'action(add) e i parametri dalla richiesta
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
 
-        // Ottieni o crea il carrello dalla sessione
+        // Ottieni o crea il carrello dalla sessione. usa hashmap per minore complessità
         Map<Integer, CartItem> carrello = (Map<Integer, CartItem>) session.getAttribute("carrello");
         if (carrello == null) {
             carrello = new HashMap<>();
             session.setAttribute("carrello", carrello);
         }
 
+        // aggiunge, rimuove, aggiorna o svuota il carrello in base all'action,
+        // usando le funzioni che trovi in fondo(ma non le aggiungo al word perchè mi scoccio)
         if ("add".equals(action)) {
             aggiungiProdotto(request, carrello);
         } else if ("update".equals(action)) {
@@ -45,6 +48,7 @@ public class CartServlet extends HttpServlet {
             carrello.clear();
         }
 
+        // reinderizza al carrello aggiornato
         response.sendRedirect(request.getContextPath() + "/carrello.jsp");
     }
 

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import model.beans.User;
 
 import java.io.IOException;
-
+// mai usata, ridondante, non la rimuovo per ora
 @WebServlet("/admin")
 public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

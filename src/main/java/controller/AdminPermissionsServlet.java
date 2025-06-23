@@ -26,18 +26,19 @@ public class AdminPermissionsServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login.jsp?error=not_logged_in");
             return;
         }
-
+        // se non è admin, reindirizza alla home con errore
         User currentUser = (User) session.getAttribute("user");
         if (!currentUser.isAdmin()) {
             response.sendRedirect(request.getContextPath() + "/index.jsp?error=access_denied");
             return;
         }
-
+        // Se l'utente è admin, carica la lista degli utenti
         try {
             UserDAO userDAO = new UserDAO();
             List<User> allUsers = userDAO.doRetrieveAll();
-
+            // aggiungi la lista degli utenti alla richiesta per permettere alla JSP di visualizzarli
             request.setAttribute("users", allUsers);
+            // Inoltra alla JSP per la visualizzazione
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin.jsp");
             dispatcher.forward(request, response);
 

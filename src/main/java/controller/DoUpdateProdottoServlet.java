@@ -51,6 +51,7 @@ public class DoUpdateProdottoServlet extends HttpServlet {
             String descrizione = request.getParameter("descrizione_" + codice);
             Part nuovaImmagine = request.getPart("nuovaImmagine_" + codice);
 
+            // crea un istanza e recupera il prodotto dal database da aggiornare
             ProdottoDAO prodottoDAO = new ProdottoDAO();
             Prodotto prodotto = prodottoDAO.doRetrieveByCodice(codice);
 
@@ -72,9 +73,12 @@ public class DoUpdateProdottoServlet extends HttpServlet {
                 String pathProdotti = getServletContext().getRealPath("/img/prodotti");
                 createDirectoryIfNotExists(pathProdotti);
 
+                // Estrae il nome del file dall'header della parte
                 String fileName = extractFileName(nuovaImmagine);
+                // destinationPath è il percorso completo dove salvare l'immagine
                 Path destinationPath = Paths.get(pathProdotti, fileName);
 
+                // legge i dati dell'immagine e la copia nella destinazione
                 try (InputStream inputStream = nuovaImmagine.getInputStream()) {
                     Files.copy(inputStream, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                 }
@@ -85,7 +89,7 @@ public class DoUpdateProdottoServlet extends HttpServlet {
             // Salva le modifiche nel database
             prodottoDAO.doUpdate(prodotto);
 
-
+            // foward alla pagina admin con messaggio di successo
             request.setAttribute("success", "prodotto_updated");
             request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 

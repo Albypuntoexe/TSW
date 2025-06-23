@@ -15,13 +15,17 @@
 
 <main class="main-content">
   <%
+    // Recupera l'ID dell'animale dalla richiesta
     int id = Integer.parseInt(request.getParameter("id"));
+    // Inizializza i DAO per recuperare i dati dell'animale e dei prodotti
     SpecieAnimaleDAO animaleDAO = new SpecieAnimaleDAO();
     ProdottoDAO prodottoDAO = new ProdottoDAO();
 
+    // recupero dei dati dal db
     SpecieAnimale animale = animaleDAO.doRetrieveById(id);
     List<Prodotto> prodotti = prodottoDAO.doRetrieveBySpecieId(id);
 
+    //impostazione degli attributi per la JSP
     request.setAttribute("animale", animale);
     request.setAttribute("prodotti", prodotti);
   %>

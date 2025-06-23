@@ -18,6 +18,7 @@ public class DeleteSpecieServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // prende l'id della specie da eliminare dal parametro della richiesta
         int id = Integer.parseInt(request.getParameter("id"));
         SpecieAnimaleDAO specieDAO = new SpecieAnimaleDAO();
         ProdottoDAO prodottoDAO = new ProdottoDAO();
