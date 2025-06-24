@@ -10,7 +10,7 @@
     <title>Carrello | Adopta</title>
 </head>
 <body>
-<jsp:include page="stickynavbar.jsp" />
+<jsp:include page="WEB-INF/stickynavbar.jsp" />
 
 <main class="main-content">
     <h1>Il tuo Carrello</h1>
@@ -98,7 +98,7 @@
     <% } %>
 </main>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="WEB-INF/footer.jsp" />
 
 <script>
     let comuniData = null;

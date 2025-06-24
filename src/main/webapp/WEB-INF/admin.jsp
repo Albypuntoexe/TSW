@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
 </head>
 <body>
-<%@ include file="/stickynavbar.jsp" %>
+<%@ include file="/WEB-INF/stickynavbar.jsp" %>
 
 <header>
   <h1>Pannello Amministratore</h1>
@@ -366,7 +366,7 @@
   </ul>
 </main>
 
-<%@ include file="/footer.jsp" %>
+<%@ include file="/WEB-INF/footer.jsp" %>
 
 <script>
   // Validazione client-side per migliorare UX

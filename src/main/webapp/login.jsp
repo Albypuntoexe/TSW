@@ -49,7 +49,7 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
   <title>Accedi | Adopta</title>
 <body>
-<jsp:include page="stickynavbar.jsp" />
+<jsp:include page="WEB-INF/stickynavbar.jsp" />
 <div class="form-switcher container text-center" style="margin: 40px auto;">
   <button id="loginSwitch"    class="btn btn-secondary active">Accedi</button>
   <button id="registerSwitch" class="btn btn-secondary">Registrati</button>
@@ -140,7 +140,7 @@
 </div>
 
 <!-- Include del footer -->
-<jsp:include page="footer.jsp" />
+<jsp:include page="WEB-INF/footer.jsp" />
 
 <script>
   // Script per il switch tra login e registrazione

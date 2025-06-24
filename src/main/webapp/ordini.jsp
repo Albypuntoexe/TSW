@@ -10,7 +10,7 @@
   <title>I miei Ordini | Adopta</title>
 </head>
 <body>
-<jsp:include page="stickynavbar.jsp" />
+<jsp:include page="WEB-INF/stickynavbar.jsp" />
 
 <main class="main-content">
   <h1>I miei Ordini</h1>
@@ -116,6 +116,6 @@
 
 </main>
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="WEB-INF/footer.jsp" />
 </body>
 </html>

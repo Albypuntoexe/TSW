@@ -11,7 +11,7 @@
 
 <body>
 <!-- Include della navbar sticky -->
-<jsp:include page="stickynavbar.jsp" />
+<jsp:include page="WEB-INF/stickynavbar.jsp" />
 
 <header class="header-background">
     <!-- Contenuto hero della pagina -->
@@ -139,6 +139,6 @@
 </section>
 
 <!-- Include del footer -->
-<jsp:include page="footer.jsp" />
+<jsp:include page="WEB-INF/footer.jsp" />
 </body>
 </html>

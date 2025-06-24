@@ -11,7 +11,7 @@
 
 <body>
 
-<jsp:include page="stickynavbar.jsp" />
+<jsp:include page="WEB-INF/stickynavbar.jsp" />
 
 <main class="main-content">
     <div class="animale-dettagli">
@@ -40,6 +40,6 @@
         </div>
     </div>
 </main>
-<jsp:include page="footer.jsp" />
+<jsp:include page="WEB-INF/footer.jsp" />
 </body>
 </html>
