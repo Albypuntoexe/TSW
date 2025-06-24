@@ -17,6 +17,7 @@ public class ProdottoDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // prende l'id dell'animale dal parametro della richiesta
         String idParam = request.getParameter("id");
 
         if (idParam == null || idParam.isEmpty()) {
@@ -27,8 +28,10 @@ public class ProdottoDetailServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(idParam);
             SpecieAnimaleDAO dao = new SpecieAnimaleDAO();
+            // Recupera l'animale dal database usando l'ID
             SpecieAnimale animale = dao.doRetrieveById(id);
 
+            // Se l'animale esiste, lo aggiunge alla richiesta e inoltra alla JSP
             if (animale != null) {
                 request.setAttribute("animale", animale);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/prodotto.jsp");

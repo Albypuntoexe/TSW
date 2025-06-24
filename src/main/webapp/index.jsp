@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
-    <link rel="icon" href="<%=request.getContextPath()%>/img/favicon.ico" type="image/x-icon">
     <title>Adopta | Salva una specie</title>
 </head>
 
@@ -18,7 +17,7 @@
     <!-- Contenuto hero della pagina -->
     <div class="hero-content">
         <h1 class="hero-title">SUPPORTA UNA SPECIE A RISCHIO</h1>
-        <p class="hero-subtitle">Sostieni una specie e ricevi in regalo un kit di adozione</p>
+        <p class="hero-subtitle">Sostieni una specie e ricevi in regalo un kit di adozione.</p>
         <!-- Statistiche in evidenza -->
         <div class="hero-stats">
             <div class="stat-item">

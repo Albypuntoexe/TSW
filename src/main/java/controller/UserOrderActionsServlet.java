@@ -25,6 +25,7 @@ public class UserOrderActionsServlet extends HttpServlet {
             return;
         }
 
+        // Verifica se l'utente è un normale utente (non admin), la sua azione e l'ID dell'ordine
         User currentUser = (User) session.getAttribute("user");
         String action = request.getParameter("action");
         String orderIdParam = request.getParameter("orderId");
@@ -38,6 +39,7 @@ public class UserOrderActionsServlet extends HttpServlet {
             int orderId = Integer.parseInt(orderIdParam);
             OrderDAO orderDAO = new OrderDAO();
 
+            // per ogni azione corrisponde un metodo del DAO
             switch (action) {
                 case "receive":
                     orderDAO.doUpdateReceivingStatus(orderId, true);

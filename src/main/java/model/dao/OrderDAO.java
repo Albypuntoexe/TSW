@@ -313,4 +313,27 @@ public class OrderDAO {
             }
         }
     }
+    public double getTotalePrezziOrdini() {
+        // La query SQL calcola la somma della colonna 'prezzo'.
+        // IFNULL gestisce il caso in cui la tabella sia vuota, restituendo 0 invece di NULL.
+        String query = "SELECT IFNULL(SUM(prezzo), 0) FROM orders";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            // Ci aspettiamo sempre una riga di risultato, anche se il valore è 0
+            if (rs.next()) {
+                // Restituisce il valore della prima colonna (la somma calcolata)
+                return rs.getDouble(1);
+            }
+
+        } catch (SQLException e) {
+            // In caso di errore SQL, stampa lo stack trace per il debug
+            e.printStackTrace();
+        }
+
+        // In caso di errore o se il ResultSet è vuoto (non dovrebbe accadere), restituisce 0
+        return 0.0;
+    }
 }

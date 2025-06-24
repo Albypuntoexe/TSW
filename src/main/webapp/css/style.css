@@ -786,6 +786,7 @@ body {
 /* =================================== */
 /* ===== STILI RESPONSIVE ===== */
 /* =================================== */
+/* Stili responsive */
 @media (max-width: 768px) {
     .main-content {
         margin-top: 60px; /* Riduci leggermente se la navbar è più compatta su mobile */
@@ -798,4 +799,19 @@ body {
     .cart-container { grid-template-columns: 1fr; }
     .order-header { flex-direction: column; gap: 10px; text-align: center; }
     .cart-item { flex-direction: column; text-align: center; }
+}
+/* Stili responsive essenziali per il pannello Admin */
+@media (max-width: 768px) {
+    .admin-panel { padding: 10px; }
+    .admin-panel input[type="text"], .admin-panel input[type="number"], .admin-panel input[type="file"], .admin-panel textarea { width: calc(100% - 20px); margin: 0 10px 10px 10px; }
+    .admin-panel button[type="submit"], .admin-panel button[type="reset"] { width: 100%; margin-bottom: 10px; display: block; }
+    .admin-table { display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+    .admin-table th, .admin-table td { min-width: 120px; box-sizing: border-box; }
+    .form-inline { display: block; margin-bottom: 10px; }
+    .form-inline button { width: 100%; }
+}
+
+@media (max-width: 480px) {
+    .admin-panel header h1 { font-size: 1.8rem; }
+    .admin-panel form legend { font-size: 1.3rem; }
 }

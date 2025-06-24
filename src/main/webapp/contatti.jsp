@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <title>Contatti | Adopta</title>
 </head>
 
@@ -25,7 +24,7 @@
     <p><strong>Telefono:</strong> +39 341 145 3486</p>
     
     <h2>Sede Legale</h2>
-    <p><strong>Indirizzo:</strong> Via Esempio 123, 00100 Roma, Italia</p>
+    <p><strong>Indirizzo:</strong> Via Lamberto 123, 00100 Roma, Italia</p>
     <p><strong>P. IVA:</strong> 01234567890</p>
     
     <h2>Orari di Apertura</h2>

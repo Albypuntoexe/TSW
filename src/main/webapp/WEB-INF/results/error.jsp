@@ -11,6 +11,6 @@
     <title>Missing items</title>
 </head>
 <body>
-Il db non contiene la risorsa richiesta.
+Errore generico: si è verificato un errore durante l'elaborazione della richiesta.
 </body>
 </html>

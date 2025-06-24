@@ -47,6 +47,7 @@
   %>
   <div class="orders-container">
     <%
+      // La pagina recupera la lista di tutti gli ordini associati a quell'utente specifico interrogando il OrderDAO
       for (Order ordine : ordini) {
     %>
     <div class="order-card">
