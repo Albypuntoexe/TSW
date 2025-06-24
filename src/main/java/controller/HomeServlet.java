@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 // Servlet principale per la home page - mostra le specie animali
-@WebServlet(name = "HomeServlet", urlPatterns = {"/home"}) // Pagina principale
+@WebServlet(name = "HomeServlet", urlPatterns = {"/home", ""})
 public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

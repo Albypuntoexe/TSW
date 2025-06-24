@@ -1,37 +1,83 @@
-# Adopta
+Progetto Adopta - README
 
-**Adopta** è una webapp progettata per supportare le specie a rischio di estinzione. Attraverso la piattaforma, gli utenti possono effettuare donazioni per sostenere una specifica specie animale e, in cambio, ricevere un kit regalo contenente gadget personalizzati legati all'animale scelto.
+==================================================
 
-## Funzionalità principali
+Questo file descrive il funzionamento e l'architettura del progetto "Adopta", una web application per la raccolta fondi a sostegno delle specie animali a rischio di estinzione.
+Parte 1: Panoramica del Progetto
+Che cos'è Adopta?
 
-- **Esplorazione delle specie a rischio**: Gli utenti possono visualizzare una lista di animali in pericolo, completa di immagini e descrizioni.
-- **Donazioni personalizzate**: Ogni animale ha una pagina dedicata che consente agli utenti di effettuare una donazione e scegliere un kit regalo.
-- **Area personale**: Gli utenti possono accedere a una sezione dedicata per gestire i propri ordini, visualizzare le donazioni effettuate e aggiornare i propri dati.
-- **Informazioni aggiuntive**: La piattaforma offre dettagli sulla missione dell'organizzazione, modi alternativi per donare e contatti.
+Adopta è una piattaforma web che permette agli utenti di supportare la salvaguardia degli animali in via di estinzione attraverso un sistema di "adozioni" simboliche. Effettuando una donazione, l'utente può scegliere una specie da sostenere e riceve in cambio un kit di adozione (Standard o Premium) come ringraziamento per il suo contributo.
 
-## Logica di base del sito
+Il sito si rivolge a due tipi di utenti:
 
-1. **Homepage**:
-   - Mostra un'introduzione alla missione di Adopta.
-   - Presenta una lista di animali recuperata dinamicamente dal database tramite un DAO (Data Access Object).
-   - Ogni animale è rappresentato da un'immagine, un nome e un pulsante "SUPPORTA ORA".
+    Utenti Pubblici: Possono navigare tra le specie disponibili, visualizzare i dettagli dei kit di adozione, registrarsi, effettuare il login, aggiungere prodotti al carrello e completare un ordine.
+    Amministratori: Hanno accesso a un pannello di controllo dedicato da cui possono gestire l'intero catalogo. Le loro funzionalità includono l'aggiunta di nuove specie animali con i relativi kit, la modifica e l'eliminazione di specie e prodotti esistenti, la gestione degli ordini e l'amministrazione dei permessi degli altri utenti.
 
-2. **Pagina di dettaglio dell'animale**:
-   - Quando un utente clicca su "SUPPORTA ORA", viene reindirizzato a una pagina dedicata all'animale selezionato.
-   - La pagina mostra informazioni dettagliate sull'animale, inclusi descrizione, immagini e opzioni di donazione.
+Architettura e Tecnologie
 
-3. **Gestione backend**:
-   - Le informazioni sugli animali sono gestite tramite un database relazionale.
-   - Le operazioni CRUD (Create, Read, Update, Delete) sugli animali sono implementate tramite il DAO.
-   - Le servlet gestiscono la logica di business, recuperando i dati dal database e inoltrandoli alle pagine JSP.
+L'applicazione è costruita seguendo il pattern architetturale Model-View-Controller (MVC) e sfrutta le seguenti tecnologie:
 
-4. **Frontend**:
-   - Le pagine sono costruite con HTML, CSS e JSTL (JavaServer Pages Standard Tag Library) per la generazione dinamica dei contenuti.
-   - Il design è responsivo e ottimizzato per offrire un'esperienza utente fluida.
+    Backend: Java, Jakarta Servlet, JSP (JavaServer Pages).
+    Frontend: HTML5, CSS3, JavaScript.
+    Database: MySQL.
+    Server: Apache Tomcat.
+    Dipendenze: JSTL (JSP Standard Tag Library) per la gestione della logica nelle JSP.
 
-5. **Area personale**:
-   - Gli utenti registrati possono accedere a una dashboard per visualizzare lo storico delle donazioni e gestire i propri dati.
+Parte 2: Flusso Tecnico dell'Applicazione
 
-## Obiettivo
+Questa sezione descrive il ciclo di vita e il flusso di dati dell'applicazione, dall'avvio del server all'interazione dell'utente.
+1. Ciclo di Vita su Tomcat
 
-L'obiettivo di Adopta è sensibilizzare il pubblico sulla protezione delle specie a rischio, offrendo un modo semplice e gratificante per contribuire alla loro salvaguardia.
+    Deploy: Tomcat decomprime il file WAR e legge il file di configurazione web.xml per mappare gli URL alle servlet.
+
+Init: Viene creato un ServletContext globale per l'applicazione. La InitServlet, grazie all'annotazione loadOnStartup, viene eseguita immediatamente per caricare la lista delle specie animali (specieAnimali) nel contesto, rendendola subito disponibile.
+Ready: Il server è pronto a ricevere e processare le richieste degli utenti tramite i metodi doGet() o doPost() delle servlet.
+Destroy: Quando l'applicazione viene arrestata, il metodo destroy() viene chiamato su tutte le servlet per rilasciare le risorse.
+
+2. Flusso Utente Standard
+
+    Accesso alla Homepage: Un utente che visita /home attiva la HomeServlet. Questa recupera la lista specieAnimali dal ServletContext, la inserisce nella richiesta e inoltra (forward) il tutto a index.jsp. La JSP usa l'Expression Language (${...}) per mostrare dinamicamente le specie. Cliccando su una specie, si viene reindirizzati alla ProdottoDetailServlet per visualizzarne i dettagli.
+
+Registrazione e Login: La pagina login.jsp gestisce sia il form di login che quello di registrazione, con JavaScript che ne alterna la visibilità e fornisce una validazione di base.
+
+    Registrazione: Un POST alla RegistrationServlet valida i dati, esegue l'hashing della password e salva il nuovo utente nel database, per poi reindirizzare (redirect) l'utente alla pagina di login con un messaggio di successo.
+
+Login: Un POST alla LoginServlet verifica le credenziali. In caso di successo, viene creata una HttpSession dove vengono salvati i dati dell'utente. Se è stata selezionata l'opzione "Ricordami", viene creato un Cookie persistente per pre-compilare l'username agli accessi futuri. L'utente viene quindi reindirizzato alla homepage o al pannello admin.
+
+Gestione Carrello:
+
+    L'aggiunta, modifica o rimozione di prodotti dal carrello invia una richiesta POST alla CartServlet. La servlet recupera il carrello (una HashMap) dalla sessione, esegue l'azione richiesta e reindirizza l'utente a carrello.jsp.
+
+AJAX: In carrello.jsp, viene usato AJAX per caricare dinamicamente il file comuni.json. Questo permette di popolare le datalist di province e città in modo interattivo, senza ricaricare la pagina.
+
+Checkout: L'invio dell'ordine da carrello.jsp attiva la CheckoutServlet. Questa verifica che l'utente sia loggato e che il carrello non sia vuoto, crea un oggetto Order, lo salva nel database tramite OrderDAO e aggiorna il totale degli incassi tramite IncassiDAO, per poi svuotare il carrello dalla sessione.
+
+Logout: La LogoutServlet invalida la sessione corrente (session.invalidate()), distruggendo tutti i dati in essa contenuti e rendendo l'ID di sessione (JSESSIONID) inutilizzabile.
+
+3. Flusso Amministratore
+
+    Accesso al Pannello: Un utente admin accede tramite la AdminPermissionsServlet, che verifica i permessi e carica la lista di tutti gli utenti, inoltrando poi la richiesta a admin.jsp.
+
+Aggiunta Specie/Prodotti: L'admin usa un form multipart/form-data per inviare dati e file alla UploadServlet. La servlet salva le immagini sul server (ottenendo il percorso reale con getServletContext().getRealPath()) e crea i nuovi record per la specie e i suoi prodotti (Standard e Premium) nel database. Infine, aggiorna il ServletContext con la nuova lista di specie.
+
+Modifica e Eliminazione:
+
+    Le modifiche a specie e prodotti vengono gestite rispettivamente da DoUpdateSpecieServlet e DoUpdateProdottoServlet, che aggiornano i record nel database.
+
+L'eliminazione di una specie, gestita da DeleteSpecieServlet, prima cancella tutti i prodotti associati per mantenere l'integrità referenziale e poi elimina la specie stessa.
+
+Gestione Permessi e Ordini:
+
+    La AdminPermissionServlet gestisce anche le richieste POST per promuovere o retrocedere un utente, con un controllo che impedisce a un admin di rimuovere i propri privilegi.
+
+La OrderManagementServlet gestisce le azioni amministrative sugli ordini, come marcare un ordine come "spedito".
+
+4. Meccanismi Trasversali
+
+    Redirect vs Forward vs Include:
+        forward: Usato per passare il controllo da una servlet a una JSP all'interno della stessa richiesta (l'URL non cambia).
+
+redirect: Usato dopo un'operazione di POST per reindirizzare il browser a un nuovo URL, prevenendo invii duplicati del form (l'URL cambia).
+include: Usato nelle JSP per inserire contenuti riutilizzabili come header e footer.
+
+HTTPS: Per garantire la sicurezza, il sito opera su HTTPS. Il processo inizia con un Handshake SSL/TLS in cui browser e server si accordano su una chiave di sessione segreta, scambiandosi un certificato SSL. Una volta stabilito il "tunnel" sicuro, ogni richiesta e risposta successiva viene crittografata usando tale chiave, proteggendo dati sensibili come password e indirizzi.

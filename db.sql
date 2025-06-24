@@ -177,9 +177,5 @@ INSERT INTO orders (user_id, prezzo, spedito, ricevuto, indirizzo_via, indirizzo
 ('silvia.lombardi@gmail.com', 25.00, true, true, 'Via Cagliari 904', 'Cagliari', 'CA', 9100),
 ('silvia.lombardi@gmail.com', 90.00, false, false, 'Via Cagliari 904', 'Cagliari', 'CA', 9100);
 
-
-UPDATE incassi
-SET totale_incassato = (SELECT SUM(prezzo) FROM orders)
-WHERE id = 1;
-select * from incassi;
 use modellomvcdb;
+select * from specie_animale;

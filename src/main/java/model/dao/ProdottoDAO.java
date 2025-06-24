@@ -173,16 +173,16 @@ public class ProdottoDAO {
 
     // Elimina un prodotto
     public void doDelete(int codice) {
-        try (Connection con = ConPool.getConnection()) {
-            // Prima eliminiamo tutti i riferimenti al prodotto nei carrelli
-            PreparedStatement ps1 = con.prepareStatement("DELETE FROM cartitem WHERE prodotto_codice=?");
-            ps1.setInt(1, codice);
-            ps1.executeUpdate();
+        String query = "DELETE FROM prodotto WHERE codice = ?";
 
-            // Poi eliminiamo il prodotto
-            PreparedStatement ps2 = con.prepareStatement("DELETE FROM prodotto WHERE codice=?");
-            ps2.setInt(1, codice);
-            ps2.executeUpdate();
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, codice);
+
+            // Esegue la cancellazione.
+            // non serve altro codice perchè on delete cascade è già impostato nella tabella
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

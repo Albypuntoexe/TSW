@@ -147,20 +147,6 @@ public class UserDAO {
         }
     }
 
-    public int doRetrieveIdByEmail(String email) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT id FROM user WHERE email=?");
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("id");
-            }
-            return -1;
-        } catch (SQLException e) {
-            throw new RuntimeException("Errore nel recupero ID utente per email", e);
-        }
-    }
-
     public User doRetrieveByUsernamePassword(String username, String unhashedPassword) {
         try (Connection con = ConPool.getConnection()) {
             // Prima recupera l'utente tramite username per ottenere l'hash memorizzato

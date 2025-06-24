@@ -123,14 +123,14 @@
         </td>
         <td>
           <!-- Form per l'update -->
-          <form id="updateForm_${specie.id}" action="doUpdateSpecie" method="post"
+          <form id="updateForm_${specie.id}" action="${pageContext.request.contextPath}/doUpdateSpecie" method="post"
                 enctype="multipart/form-data" class="form-inline">
             <input type="hidden" name="id" value="${specie.id}">
             <button type="submit">Aggiorna</button>
           </form>
 
           <!-- Form per la delete -->
-          <form action="deleteSpecie" method="post" class="form-inline">
+          <form action="${pageContext.request.contextPath}/deleteSpecie" method="post" class="form-inline">
             <input type="hidden" name="id" value="${specie.id}">
             <button type="submit" onclick="return confirm('Sei sicuro di voler eliminare questa specie?')">
               Elimina
@@ -200,7 +200,7 @@
             </td>
             <td>
               <!-- Form per l'update del prodotto -->
-              <form id="updateProdottoForm_${prodotto.codice}" action="doUpdateProdotto" method="post"
+              <form id="updateProdottoForm_${prodotto.codice}" action="${pageContext.request.contextPath}/doUpdateProdotto" method="post"
                     enctype="multipart/form-data">
                 <input type="hidden" name="codice" value="${prodotto.codice}">
                 <input type="hidden" name="specieId" value="${prodotto.specieId}">
