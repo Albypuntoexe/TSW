@@ -31,5 +31,24 @@ public class IncassiDAO {
             throw new RuntimeException(e);
         }
     }
+    public void setIncassiIniziali(double totale) {
+        // La query aggiorna la colonna 'totale_incassato'.
+        // La clausola WHERE id = 1 assicura che venga aggiornato solo il record corretto.
+        String query = "UPDATE incassi SET totale_incassato = ? WHERE id = 1";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            // Imposta il parametro della query (?) con il valore del totale
+            ps.setDouble(1, totale);
+
+            // Esegue l'aggiornamento
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            // In caso di errore SQL, stampa lo stack trace per il debug
+            e.printStackTrace();
+        }
+    }
 
 }
